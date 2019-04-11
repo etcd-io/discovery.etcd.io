@@ -1,0 +1,14 @@
+kind: ""
+apiversion: ""
+resources:
+- backup-operator-clusterrole-binding.yaml
+- backup-operator-deployment.yaml
+- backup-operator-service-account.yaml
+- operator-cluster-role.yaml
+- operator-clusterrole-binding.yaml
+- operator-deployment.yaml
+- operator-service-account.yaml
+- restore-operator-clusterrole-binding.yaml
+- restore-operator-deployment.yaml
+- restore-operator-service-account.yaml
+- restore-operator-service.yaml

@@ -1,0 +1,49 @@
+---
+# Source: etcd-operator/templates/backup-operator-deployment.yaml
+
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: etcd-operator-etcd-operator-etcd-backup-operator
+  labels:
+    chart: "etcd-operator-0.8.3"
+    app: etcd-backup-operator
+    heritage: Tiller
+    release: etcd-operator
+spec:
+  selector:
+    matchLabels:
+      app: etcd-operator-etcd-operator-etcd-backup-operator
+      release: etcd-operator
+  replicas: 1
+  template:
+    metadata:
+      name: etcd-operator-etcd-operator-etcd-backup-operator
+      labels:
+        app: etcd-operator-etcd-operator-etcd-backup-operator
+        release: etcd-operator
+    spec:
+      serviceAccountName: etcd-operator-etcd-operator-etcd-backup-operator
+      containers:
+      - name: etcd-backup-operator
+        image: "quay.io/coreos/etcd-operator:v0.9.3"
+        imagePullPolicy: Always
+        command:
+        - etcd-backup-operator
+        env:
+        - name: MY_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
