@@ -5,3 +5,24 @@ metadata:
 spec:
   size: 3
   version: "3.2.13"
+  pod:
+    etcdEnv:
+    - name: ETCD_AUTO_COMPACTION_RETENTION
+      value: "1"
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: etcd_cluster
+              operator: In
+              values: ["discovery-etcd-cluster"]
+          topologyKey: kubernetes.io/hostname
+    annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "2379"
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 9000
+      # The FSGroup is needed to let the etcd container access mounted volumes
+      fsGroup: 9000
