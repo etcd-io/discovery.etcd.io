@@ -9,6 +9,8 @@ spec:
     etcdEnv:
     - name: ETCD_AUTO_COMPACTION_RETENTION
       value: "1"
+      name: ETCDCTL_API
+      value: "3"
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
