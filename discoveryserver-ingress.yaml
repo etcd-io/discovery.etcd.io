@@ -3,8 +3,9 @@ kind: Ingress
 metadata:
   name: discoveryserver-ingress
   annotations:
-    kubernetes.io/ingress.allow-http: "false"
-    kubernetes.io/ingress.global-static-ip-name: 35.244.222.197
+    # TODO(philips): turn this on before going into production
+    # kubernetes.io/ingress.allow-http: "false"
+    kubernetes.io/ingress.global-static-ip-name: discovery
     networking.gke.io/managed-certificates: discoveryserver-certificate
 spec:
   backend:
