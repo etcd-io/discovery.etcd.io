@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discoveryserver
+  labels:
+    app: discoveryserver
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: discoveryserver
+  template:
+    metadata:
+      labels:
+        app: discoveryserver
+    spec:
+      securityContext:
+        runAsUser: 9001
+        runAsGroup: 9001
+        fsGroup: 9001
+      containers:
+      - name: discoveryserver
+        image: quay.io/philips/discoveryserver:latest
+        imagePullPolicy: Always
+        env:
+        - name: DISC_ETCD
+          value: "http://discovery-etcd-cluster-client:2379"
+        - name: DISC_HOST
+          value: "http://localhost"
+        ports:
+        - containerPort: 8087
+        securityContext:
+          allowPrivilegeEscalation: false
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8087
+
