@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: discoveryserver
+        bump: "1"
     spec:
       securityContext:
         runAsUser: 9001
@@ -26,7 +27,7 @@ spec:
         - name: DISC_ETCD
           value: "http://discovery-etcd-cluster-client:2379"
         - name: DISC_HOST
-          value: "http://localhost"
+          value: "https://discovery.ifup.org"
         ports:
         - containerPort: 8087
         securityContext:
