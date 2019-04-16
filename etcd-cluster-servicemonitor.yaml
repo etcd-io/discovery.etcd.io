@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: discovery-etcd-cluster
+  labels:
+    app: discovery
+spec:
+  selector:
+    matchLabels:
+      app: etcd
+      etcd_cluster: discovery-etcd-cluster
+  endpoints:
+  - port: client

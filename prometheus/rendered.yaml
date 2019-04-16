@@ -15568,8 +15568,7 @@ spec:
   ruleNamespaceSelector: {}
   ruleSelector:
     matchLabels:
-      app: prometheus-operator
-      release: prometheus-operator
+      app: discovery
   securityContext:
     fsGroup: 2000
     runAsNonRoot: true
@@ -15578,7 +15577,7 @@ spec:
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector:
     matchLabels:
-      release: prometheus-operator
+      app: etcd
   version: v2.7.1
 ---
 apiVersion: monitoring.coreos.com/v1
