@@ -1,0 +1,5 @@
+---
+# Source: prometheus-operator/templates/prometheus/rules/etcd.yaml
+# Generated from 'etcd' group from https://raw.githubusercontent.com/etcd-io/etcd/master/Documentation/op-guide/etcd3_alert.rules.yml
+# Do not change in-place! In order to change this file first read following link:
+# https://github.com/helm/charts/tree/master/stable/prometheus-operator/hack

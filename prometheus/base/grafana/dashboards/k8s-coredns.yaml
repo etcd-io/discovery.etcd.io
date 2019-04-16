@@ -1,0 +1,3 @@
+---
+# Source: prometheus-operator/templates/grafana/dashboards/k8s-coredns.yaml
+# Added manually, can be changed in-place.

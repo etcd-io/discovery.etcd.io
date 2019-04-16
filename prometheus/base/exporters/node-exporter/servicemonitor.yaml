@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: prometheus-operator-node-exporter
+    chart: prometheus-operator-5.0.11
+    heritage: Tiller
+    release: prometheus-operator
+  name: prometheus-operator-node-exporter
+spec:
+  endpoints:
+  - port: metrics
+  jobLabel: jobLabel
+  selector:
+    matchLabels:
+      app: prometheus-node-exporter
+      release: prometheus-operator

@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app: kube-state-metrics
+    release: prometheus-operator
+  name: prometheus-operator-kube-state-metrics
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus-operator-kube-state-metrics
+subjects:
+- kind: ServiceAccount
+  name: prometheus-operator-kube-state-metrics
+  namespace: default

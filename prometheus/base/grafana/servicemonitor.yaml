@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: prometheus-operator-grafana
+    chart: prometheus-operator-5.0.11
+    heritage: Tiller
+    release: prometheus-operator
+  name: prometheus-operator-grafana
+spec:
+  endpoints:
+  - path: /metrics
+    port: service
+  namespaceSelector:
+    matchNames:
+    - default
+  selector:
+    matchLabels:
+      app: grafana
+      release: prometheus-operator

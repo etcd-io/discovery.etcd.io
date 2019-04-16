@@ -1,0 +1,24 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Alertmanager
+metadata:
+  labels:
+    app: prometheus-operator-alertmanager
+    chart: prometheus-operator-5.0.11
+    heritage: Tiller
+    release: prometheus-operator
+  name: prometheus-operator-alertmanager
+spec:
+  baseImage: quay.io/prometheus/alertmanager
+  externalUrl: http://prometheus-operator-alertmanager.default:9093
+  listenLocal: false
+  logLevel: info
+  paused: false
+  replicas: 1
+  retention: 120h
+  routePrefix: /
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccountName: prometheus-operator-alertmanager
+  version: v0.16.1

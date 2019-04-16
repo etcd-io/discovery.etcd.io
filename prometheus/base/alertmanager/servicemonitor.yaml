@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: prometheus-operator-alertmanager
+    chart: prometheus-operator-5.0.11
+    heritage: Tiller
+    release: prometheus-operator
+  name: prometheus-operator-alertmanager
+spec:
+  endpoints:
+  - path: /metrics
+    port: web
+  namespaceSelector:
+    matchNames:
+    - default
+  selector:
+    matchLabels:
+      app: prometheus-operator-alertmanager
+      release: prometheus-operator

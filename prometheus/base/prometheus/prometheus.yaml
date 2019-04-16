@@ -1,0 +1,39 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  labels:
+    app: prometheus-operator-prometheus
+    chart: prometheus-operator-5.0.11
+    heritage: Tiller
+    release: prometheus-operator
+  name: prometheus-operator-prometheus
+spec:
+  alerting:
+    alertmanagers:
+    - name: prometheus-operator-alertmanager
+      namespace: default
+      pathPrefix: /
+      port: web
+  baseImage: quay.io/prometheus/prometheus
+  externalUrl: http://prometheus-operator-prometheus.default:9090
+  listenLocal: false
+  logLevel: info
+  paused: false
+  replicas: 1
+  retention: 10d
+  routePrefix: /
+  ruleNamespaceSelector: {}
+  ruleSelector:
+    matchLabels:
+      app: prometheus-operator
+      release: prometheus-operator
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccountName: prometheus-operator-prometheus
+  serviceMonitorNamespaceSelector: {}
+  serviceMonitorSelector:
+    matchLabels:
+      release: prometheus-operator
+  version: v2.7.1
