@@ -20,9 +20,6 @@ spec:
               operator: In
               values: ["discovery-etcd-cluster"]
           topologyKey: kubernetes.io/hostname
-    annotations:
-      prometheus.io/scrape: "true"
-      prometheus.io/port: "2379"
     securityContext:
       runAsNonRoot: true
       runAsUser: 9000
