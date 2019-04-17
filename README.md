@@ -39,4 +39,4 @@ kubectl edit prometheus prometheus-operator-prometheus
 kubectl proxy
 ```
 
-Visit http://localhost:8001/api/v1/namespaces/default/services/prometheus-operated:web/proxy/graph
+Visit http://localhost:8001/api/v1/namespaces/default/services/prometheus-operated:web/proxy
