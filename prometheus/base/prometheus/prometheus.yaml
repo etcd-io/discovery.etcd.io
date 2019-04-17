@@ -23,16 +23,12 @@ spec:
   retention: 10d
   routePrefix: /
   ruleNamespaceSelector: {}
-  ruleSelector:
-    matchLabels:
-      app: discovery
+  ruleSelector: {}
   securityContext:
     fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 1000
   serviceAccountName: prometheus-operator-prometheus
   serviceMonitorNamespaceSelector: {}
-  serviceMonitorSelector:
-    matchLabels:
-      app: discovery
+  serviceMonitorSelector: {}
   version: v2.7.1

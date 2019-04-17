@@ -15566,9 +15566,7 @@ spec:
   retention: 10d
   routePrefix: /
   ruleNamespaceSelector: {}
-  ruleSelector:
-    matchLabels:
-      app: discovery
+  ruleSelector: {}
   securityContext:
     fsGroup: 2000
     runAsNonRoot: true
