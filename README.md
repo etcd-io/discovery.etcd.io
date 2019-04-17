@@ -2,6 +2,16 @@
 
 This repo contains the Kubernetes configurations to operate the public discovery.etcd.io service.
 
+## Install
+
+Everything should come up with minor customizations. See `discoveryserver-ingress.yaml` and `discoveryserver-certificates.yaml` for hostname customizations.
+
+```
+kubectl apply -f etcd-operator/rendered.yaml
+kubectl apply -f prometheus/rendered.yaml
+for i in *.yaml; do kubectl apply -f $i; done
+```
+
 ## Debugging
 
 **Hit the discovery service via kubectl proxy**
