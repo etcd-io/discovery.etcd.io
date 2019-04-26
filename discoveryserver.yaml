@@ -5,7 +5,7 @@ metadata:
   labels:
     app: discoveryserver
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: discoveryserver
@@ -36,3 +36,12 @@ spec:
           httpGet:
             path: /health
             port: 8087
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values: ["discoveryserver"]
+            topologyKey: kubernetes.io/hostname
