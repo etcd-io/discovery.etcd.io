@@ -3,7 +3,8 @@ kind: Ingress
 metadata:
   name: discoveryserver-ingress
   annotations:
-    kubernetes.io/ingress.allow-http: "false"
+    # hack/insta-discovery uses http
+    kubernetes.io/ingress.allow-http: "true"
     kubernetes.io/ingress.global-static-ip-name: discovery
     networking.gke.io/managed-certificates: discoveryserver-certificate
 spec:
