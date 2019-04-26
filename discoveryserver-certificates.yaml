@@ -4,4 +4,4 @@ metadata:
   name: discoveryserver-certificate
 spec:
   domains:
-    - discovery.ifup.org
+    - discovery.etcd.io

@@ -27,7 +27,7 @@ spec:
         - name: DISC_ETCD
           value: "http://discovery-etcd-cluster-client:2379"
         - name: DISC_HOST
-          value: "https://discovery.ifup.org"
+          value: "https://discovery.etcd.io"
         ports:
         - containerPort: 8087
         securityContext:
@@ -36,4 +36,3 @@ spec:
           httpGet:
             path: /health
             port: 8087
-
