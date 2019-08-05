@@ -12,6 +12,8 @@ kubectl apply -f prometheus/rendered.yaml
 for i in *.yaml; do kubectl apply -f $i; done
 ```
 
+![block diagram of infrastructure](img/infra.png)
+
 ## Debugging
 
 **Hit the discovery service via kubectl proxy**
