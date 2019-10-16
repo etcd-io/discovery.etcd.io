@@ -17,3 +17,8 @@ variable "gke_nodepools" {
   type        = list(map(string))
   description = "List of maps containing node pools"
 }
+
+variable "gke_master_authorized_networks" {
+  description = "The networks from which a connection to the master can be established"
+  type        = "list"
+}

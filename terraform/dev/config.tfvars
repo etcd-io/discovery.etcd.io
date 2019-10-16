@@ -24,3 +24,10 @@ gke_nodepools = [
     version = "1.14.3-gke.11"
   },
 ]
+
+gke_master_authorized_networks = [
+  {
+    display_name = "open",
+    cidr_block = "0.0.0.0/0"
+  }
+]

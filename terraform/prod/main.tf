@@ -15,9 +15,3 @@ provider "google-beta" {
   project     = var.gcp["project"]
   region      = var.gcp["region"]
 }
-
-module "vpc" {
-  source = "../modules/networking/vpc"
-  environment = var.environment
-  gcp = var.gcp
-}
