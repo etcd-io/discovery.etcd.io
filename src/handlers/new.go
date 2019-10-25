@@ -30,9 +30,9 @@ import (
 	"time"
 
 	"go.etcd.io/etcd/clientv3"
-	"go.etcd.io/etcd/discoveryserver/handlers/httperror"
-	"go.etcd.io/etcd/discoveryserver/metrics"
-	"go.etcd.io/etcd/discoveryserver/timeprefix"
+	"go.etcd.io/discoveryserver/handlers/httperror"
+	"go.etcd.io/discoveryserver/metrics"
+	"go.etcd.io/discoveryserver/timeprefix"
 	"go.etcd.io/etcd/etcdserver/api/v2store"
 	"go.etcd.io/etcd/etcdserver/api/v2v3"
 

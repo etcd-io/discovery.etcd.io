@@ -22,8 +22,8 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 
-	"go.etcd.io/etcd/discoveryserver/handlers/httperror"
-	"go.etcd.io/etcd/discoveryserver/metrics"
+	"go.etcd.io/discoveryserver/handlers/httperror"
+	"go.etcd.io/discoveryserver/metrics"
 )
 
 var healthCounter *prometheus.CounterVec

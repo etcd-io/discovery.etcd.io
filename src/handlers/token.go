@@ -25,8 +25,8 @@ import (
 	"strings"
 	"time"
 
-	"go.etcd.io/etcd/discoveryserver/handlers/httperror"
-	"go.etcd.io/etcd/discoveryserver/metrics"
+	"go.etcd.io/discoveryserver/handlers/httperror"
+	"go.etcd.io/discoveryserver/metrics"
 	"go.etcd.io/etcd/etcdserver/api/v2store"
 
 	"github.com/prometheus/client_golang/prometheus"

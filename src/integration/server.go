@@ -24,8 +24,8 @@ import (
 	"testing"
 	"time"
 
-	"go.etcd.io/etcd/discoveryserver/handlers"
-	discoveryhttp "go.etcd.io/etcd/discoveryserver/http"
+	"go.etcd.io/discoveryserver/handlers"
+	discoveryhttp "go.etcd.io/discoveryserver/http"
 
 	"go.etcd.io/etcd/embed"
 	"go.etcd.io/etcd/etcdserver/api/v3client"

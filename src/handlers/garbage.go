@@ -23,7 +23,7 @@ import (
 	"go.etcd.io/etcd/clientv3"
 	"go.etcd.io/etcd/clientv3/concurrency"
 
-	"go.etcd.io/etcd/discoveryserver/timeprefix"
+	"go.etcd.io/discoveryserver/timeprefix"
 )
 
 func discoveryGCPath() string {

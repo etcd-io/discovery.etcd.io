@@ -23,7 +23,7 @@ import (
 	"os"
 	"time"
 
-	handling "go.etcd.io/etcd/discoveryserver/http"
+	handling "go.etcd.io/discoveryserver/http"
 
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"

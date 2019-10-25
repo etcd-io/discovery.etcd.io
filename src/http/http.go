@@ -19,8 +19,8 @@ import (
 	"net/http"
 	"os"
 
-	"go.etcd.io/etcd/discoveryserver/handlers"
-	"go.etcd.io/etcd/discoveryserver/metrics"
+	"go.etcd.io/discoveryserver/handlers"
+	"go.etcd.io/discoveryserver/metrics"
 
 	gorillaHandlers "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
