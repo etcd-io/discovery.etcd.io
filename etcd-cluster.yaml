@@ -8,8 +8,10 @@ spec:
   pod:
     etcdEnv:
     - name: ETCD_AUTO_COMPACTION_RETENTION
-      value: "1"
-      name: ETCDCTL_API
+      value: "1h"
+    - name: ETCD_AUTO_COMPACTION_MODE
+      value: "periodic"
+    - name: ETCDCTL_API
       value: "3"
     affinity:
       podAntiAffinity:
