@@ -1,5 +1,5 @@
 # etcd Operator
-The etcd operator is installed using the stable version from helm repos.
+The etcd operator and the etcd cluster are installed using the stable chart version from helm repos.
 
 ## Requirements
 
