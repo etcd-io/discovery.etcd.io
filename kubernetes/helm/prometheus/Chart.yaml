@@ -1,0 +1,8 @@
+apiVersion: v2
+name: prometheus
+description: Prometheus operator
+version: 0.1.0
+dependencies:
+  - name: prometheus-operator
+    version: 7.0.*
+    repository: https://kubernetes-charts.storage.googleapis.com/
