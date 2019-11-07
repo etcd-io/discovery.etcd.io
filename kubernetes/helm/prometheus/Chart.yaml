@@ -2,6 +2,7 @@ apiVersion: v2
 name: prometheus
 description: Prometheus operator
 version: 0.1.0
+appVersion: 0.1.0q
 dependencies:
   - name: prometheus-operator
     version: 7.0.*
