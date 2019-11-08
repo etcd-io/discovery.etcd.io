@@ -18,14 +18,6 @@ The command deploys prometheus-operator on the Kubernetes cluster in custom valu
 
 The default installation includes Prometheus Operator, Alertmanager, Grafana, and configuration for scraping Kubernetes infrastructure.
 
-## Uninstalling the Chart
-
-To uninstall/delete the `prometheus` deployment:
-
-```console
-$ helm uninstall prometheus -n prometheus
-```
-
 ## Work-Arounds for Known Issues
 
 ### Running on private GKE clusters
@@ -59,7 +51,7 @@ $ helm install --name my-release stable/prometheus-operator --set prometheusOper
 To uninstall/delete the `prometheus` deployment:
 
 ```console
-$ helm delete prometheus
+$ helm uninstall prometheus -n prometheus
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
