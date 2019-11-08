@@ -1,0 +1,21 @@
+controller:
+  autoscaling:
+    enabled: true
+    minReplicas: 3
+    maxReplicas: 18
+  metrics:
+    enabled: true
+  replicaCount: 3
+  service:
+    externalTrafficPolicy: Local
+  stats:
+    enabled: true
+  config:
+    log-format-upstream: '{ "time": "$time_iso8601", "request_id": "$req_id", "proxy_protocol_addr": "$proxy_protocol_addr", "remote_addr": "$remote_addr", "client_ip": "$the_real_ip", "remote_user": "$remote_user", "http_user_agent": "$http_user_agent", "vhost": "$host", "method": "$request_method", "path": "$uri", "query": "$query_string", "protocol": "$server_protocol", "service_name": "$service_name", "http_referrer": "$http_referer", "status": $status, "request_time": $request_time, "request_length": $request_length, "body_bytes_sent": $body_bytes_sent, "proxy_upstream_name": "$proxy_upstream_name", "proxy_alternative_upstream_name": "$proxy_alternative_upstream_name", "upstream_addr": "$upstream_addr", "upstream_response_length": $upstream_response_length, "upstream_response_time": $upstream_response_time, "upstream_status": $upstream_status }'
+    log-format-escape-json: "true"
+
+rbac:
+  create: true
+
+serviceAccount:
+  create: true
