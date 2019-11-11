@@ -13,5 +13,5 @@ helm repo update
 
 # Install 
 export ENV=(dev|prod)
-helm upgrade cert-manager jetstack/cert-manager --install --namespace cert-manager -f $ENV.values.yaml
+helm upgrade cert-manager . --install --namespace cert-manager -f $ENV.values.yaml
 ```
