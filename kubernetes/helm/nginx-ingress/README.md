@@ -10,7 +10,7 @@ $ kubectl create namespace nginx-ingress
 
 ```bash
 export ENV=(dev|prod)
-helm upgrade nginx-ingress stable/nginx-ingress --install --namespace nginx-ingress -f $ENV.values.yaml
+helm upgrade nginx-ingress stable/nginx-ingress --install --namespace nginx-ingress
 ```
 
 ## Override values in the chart
@@ -20,7 +20,7 @@ For example, if you want to change the default value of autoscaling to enable th
 ```bash
 $ export AUTOSCALER=true
 $ export ENV=prod
-$ helm upgrade etcd-operator stable/etcd-operator --install --namespace etcd-operator -f $ENV.values.yaml --set controller.autoscaling.enabled=true
+$ helm upgrade nginx-ingress stable/nginx-ingress --install --namespace nginx-ingress --set controller.autoscaling.enabled=true
 ```
 
 See all configurable parameters of the nginx-ingress chart [here](https://github.com/helm/charts/tree/master/stable/nginx-ingress#configuration).
