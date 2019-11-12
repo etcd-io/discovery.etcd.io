@@ -1,0 +1,14 @@
+clusterissuer:
+  name: letsencrypt
+  email: engineering@cloudkite.io
+  server: https://acme-v02.api.letsencrypt.org/directory
+  solvers:
+    - http01:
+        ingress:
+          class: nginx
+
+cert-manager:
+  enabled: true
+  ingressShim:
+    defaultIssuerName: "letsencrypt"
+    defaultIssuerKind: "ClusterIssuer"
