@@ -8,9 +8,7 @@ clusterissuer:
           class: nginx
 
 cert-manager:
-
   enabled: true
-
   ingressShim:
     defaultIssuerName: "letsencrypt"
     defaultIssuerKind: "ClusterIssuer"
