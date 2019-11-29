@@ -26,7 +26,7 @@ spec:
         fsGroup: 9001
       containers:
       - name: discoveryserver
-        image: quay.io/etcd/discoveryserver:latest
+        image: quay.io/etcd/discoveryserver
         imagePullPolicy: Always
         env:
         - name: DISC_ETCD
