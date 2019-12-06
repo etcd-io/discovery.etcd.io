@@ -30,7 +30,7 @@ securityContext:
 
 environment:
   - name: DISC_ETCD
-    value: "http://etcd-cluster-client.etcd-operator.svc.cluster.local:2379"
+    value: "http://discovery-etcd-cluster-client:2379"
   - name: DISC_HOST
     value: "https://dev.discovery.etcd.io"
   - name: DISC_MINAGE

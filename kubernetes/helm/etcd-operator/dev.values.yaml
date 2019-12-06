@@ -71,7 +71,7 @@ etcdOperator:
 
 ## etcd-cluster specific values
 etcdCluster:
-  name: etcd-cluster
+  name: discovery-etcd-cluster
   size: 3
   version: 3.2.25
   image:
