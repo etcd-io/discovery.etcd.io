@@ -12,5 +12,5 @@ $ kubectl apply -f crds/etcd-cluster-crd.yaml
 ## Install etcd-operator from helm repos
 ```bash
 $ export ENV=(dev|prod)
-$ helm upgrade etcd-operator stable/etcd-operator --install --namespace etcd-operator -f $ENV.values.yaml
+$ helm upgrade etcd-operator stable/etcd-operator --install --namespace discoveryserver -f $ENV.values.yaml
 ```
