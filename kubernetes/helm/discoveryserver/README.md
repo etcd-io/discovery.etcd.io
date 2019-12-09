@@ -42,21 +42,12 @@ The following table lists the configurable parameters of the discoveryserver cha
 
 | Parameter | Description | Default |
 | --------- | ----------- | ------- |
-| `global.imagePullSecrets` | Reference to one or more secrets to be used when pulling images | `[]` |
 | `image.repository` | Image repository | `gcr.io/etcd-io-dev/discoveryserver` |
 | `image.tag` | Image tag | `latest` |
 | `image.pullPolicy` | Image pull policy | `Always` |
 | `replicaCount`  | Number of discoveryserver replicas  | `3` |
 | `serviceAccount.create` | If `true`, create a new service account | `true` |
 | `serviceAccount.name` | Service account to be used. If not set and `serviceAccount.create` is `true`, a name is generated using the fullname template | "" |
-| `resources` | CPU/memory resource requests/limits | |
-| `securityContext.allowPrivilegeEscalation` | Controls whether a process can gain more privileges than its parent process | `false` |
-| `nodeSelector` | Node labels for pod assignment | `{}` |
-| `affinity` |  Constrains which nodes pods are eligible to be scheduled on | [See values](https://github.com/etcd-io/discovery.etcd.io/tree/master/kubernetes/helm/discoveryserver/dev.values.yaml) |
-| `minReadySeconds` | How many seconds a pod needs to be ready before killing the next, during update | `5` |
-| `strategy.type` | Rollout strategy type | `rollingUpdate` |
-| `strategy.rollingUpdate.maxSurge` | Specifies the maximum number of Pods that can be created over the desired number of Pods | `1` |
-| `strategy.rollingUpdate.maxUnavailable` | Specifies the maximum number of Pods that can be unavailable during the update process | `1` |
 | `metrics.enabled`| Enable metrics scraped by prometheus | `true` |
 | `metrics.serviceMonitor.enabled` | Enables the target to be monitored by Prometheus | `true` |
 | `metrics.serviceMonitor.additionalLabels` | Additional labels that can be used so ServiceMonitor will be discovered by Prometheus | `{}` |

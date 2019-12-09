@@ -20,14 +20,6 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-podSecurityContext:
-  runAsUser: 9001
-  runAsGroup: 9001
-  fsGroup: 9001
-
-securityContext:
-  allowPrivilegeEscalation: false
-
 environment:
   - name: DISC_ETCD
     value: "http://discovery-etcd-cluster-client:2379"
@@ -57,7 +49,7 @@ ingress:
 resources:
    limits:
      cpu: 200m
-     memory: 256Mi
+     memory: 1200Mi
    requests:
      cpu: 100m
      memory: 128Mi
@@ -65,24 +57,6 @@ resources:
 nodeSelector: {}
 
 tolerations: []
-
-affinity:
-  podAntiAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-    - labelSelector:
-        matchExpressions:
-        - key: app
-          operator: In
-          values: ["discoveryserver"]
-      topologyKey: kubernetes.io/hostname
-
-minReadySeconds: 5
-
-strategy:
-  type: RollingUpdate
-  rollingUpdate:
-    maxSurge: 1
-    maxUnavailable: 1
 
 metrics:
   enabled: true

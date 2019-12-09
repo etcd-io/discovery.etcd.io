@@ -9,11 +9,12 @@ spec:
   selector:
     matchLabels:
       {{- include "discoveryserver.selectorLabels" . | nindent 6 }}
-  minReadySeconds: {{ .Values.minReadySeconds }}
-  {{- with .Values.strategy }}
+  minReadySeconds: 5
   strategy:
-    {{- . | toYaml | nindent 4 }}
-  {{- end }}
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:
@@ -25,11 +26,13 @@ spec:
     {{- end }}
       serviceAccountName: {{ include "discoveryserver.serviceAccountName" . }}
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        runAsUser: 9001
+        runAsGroup: 9001
+        fsGroup: 9001
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
+            allowPrivilegeEscalation: false
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
@@ -54,7 +57,14 @@ spec:
       {{- end }}
     {{- with .Values.affinity }}
       affinity:
-        {{- toYaml . | nindent 8 }}
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app
+                  operator: In
+                  values: ["discoveryserver"]
+            topologyKey: kubernetes.io/hostname
     {{- end }}
     {{- with .Values.tolerations }}
       tolerations:
