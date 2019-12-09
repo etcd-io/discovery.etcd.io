@@ -6,7 +6,7 @@ Installs [discoveryserver](https://github.com/etcd-io/discoveryserver) to create
 
 ```console
 $ export ENV=(dev|prod)
-$ helm upgrade discoveryserver . --install --namespace discoveryserver -f dev.values.yaml
+$ helm upgrade discoveryserver . --install --namespace discoveryserver -f $ENV.values.yaml
 ```
 
 ## Introduction
@@ -21,7 +21,8 @@ This chart bootstraps a [discoveryserver](https://github.com/etcd-io/discoveryse
 To install the chart with the release name `discoveryserver` in the namespace `discoveryserver`:
 
 ```console
-$ helm upgrade discoveryserver . --install --namespace discoveryserver -f dev.values.yaml --debug
+$ export ENV=(dev|prod)
+$ helm upgrade discoveryserver . --install --namespace discoveryserver -f $ENV.values.yaml --debug
 ```
 
 The command deploys discoveryserver on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
