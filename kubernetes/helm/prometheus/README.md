@@ -11,7 +11,7 @@ To install the chart with release name `prometheus` run:
 
 ```console
 $ export ENV=(dev|prod)
-$ helm upgrade prometheus . --install --namespace prometheus -f $ENV.values.yaml
+$ helm upgrade prometheus-operator . --install --namespace prometheus -f $ENV.values.yaml
 ```
 
 The command deploys prometheus-operator on the Kubernetes cluster in custom values configuration. The [configuration](https://github.com/helm/charts/blob/master/stable/prometheus-operator/README.md#configuration) section lists the parameters that can be configured during installation.
