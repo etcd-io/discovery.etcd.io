@@ -5,8 +5,9 @@ Installs [discoveryserver](https://github.com/etcd-io/discoveryserver) to create
 ## TL;DR;
 
 ```console
+$ kubectl create namespace discoveryserver
 $ export ENV=(dev|prod)
-$ helm upgrade discoveryserver . --install --namespace discoveryserver -f $ENV.values.yaml
+$ helm upgrade discoveryserver . --install --namespace discoveryserver -f ${ENV}.values.yaml
 ```
 
 ## Introduction
@@ -17,12 +18,18 @@ This chart bootstraps a [discoveryserver](https://github.com/etcd-io/discoveryse
   - Kubernetes 1.14+
   - Helm [3+](https://helm.sh)
   - Etcd cluster
+  
+Create the namespace:
+
+```console
+$ kubectl create namespace discoveryserver
+```
 
 To install the chart with the release name `discoveryserver` in the namespace `discoveryserver`:
 
 ```console
 $ export ENV=(dev|prod)
-$ helm upgrade discoveryserver . --install --namespace discoveryserver -f $ENV.values.yaml --debug
+$ helm upgrade discoveryserver . --install --namespace discoveryserver -f ${ENV}.values.yaml --debug
 ```
 
 The command deploys discoveryserver on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -58,7 +65,6 @@ The following table lists the configurable parameters of the discoveryserver cha
 | `ingress.hosts.paths` | Paths to match against incoming requests. | `[/]` |
 | `ingress.tls.secretNames` | Secret's name where SSL/TLS certificate will be stored. | `discoveryserver-tls` |
 | `ingress.tls.hosts` | Hosts for which SSL/TLS certificate must be issued. | `["discovery.etcd.io", "www.discovery.etcd.io"]` |
-| `ingress.tls.hosts` | Hosts for which SSL/TLS certificate must be issued. | `["discovery.etcd.io", "www.discovery.etcd.io"]` |
-| `environment` | List of environment variables required by the discoveryserver service container.  | [See values](https://github.com/etcd-io/discovery.etcd.io/tree/master/kubernetes/helm/discoveryserver/dev.values.yaml#L31-#L37) |
+| `environment` | List of environment variables required by the discoveryserver service container. | {"DISC_ETCD":"http://discovery-etcd-cluster-client:2379", "DISC_HOST":"https://dev.discovery.etcd.io", "DISC_MINAGE":"12h"}|
 
 

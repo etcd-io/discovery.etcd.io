@@ -40,6 +40,9 @@ ingress:
     - host: dev.discovery.etcd.io
       paths:
         - /
+    - host: www.dev.discovery.etcd.io
+      paths:
+        - /
   tls:
     - secretName: dev-discoveryserver-tls
       hosts:
@@ -48,8 +51,8 @@ ingress:
 
 resources:
    limits:
-     cpu: 200m
-     memory: 1200Mi
+     cpu: 100m
+     memory: 128Mi
    requests:
      cpu: 100m
      memory: 128Mi
