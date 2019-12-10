@@ -71,7 +71,7 @@ etcdOperator:
 
 ## etcd-cluster specific values
 etcdCluster:
-  name: etcd-cluster
+  name: discovery-etcd-cluster
   size: 3
   version: 3.2.25
   image:
@@ -115,11 +115,11 @@ etcdCluster:
       fsGroup: 9000
     resources:
       limits:
-        cpu: 100m
-        memory: 128Mi
+        cpu: 200m
+        memory: 1200Mi
       requests:
         cpu: 100m
-        memory: 128Mi
+        memory: 600Mi
     ## Node labels for etcd pod assignment
     ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
     nodeSelector: {}
