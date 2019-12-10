@@ -119,7 +119,7 @@ etcdCluster:
         memory: 1200Mi
       requests:
         cpu: 100m
-        memory: 128Mi
+        memory: 600Mi
     ## Node labels for etcd pod assignment
     ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
     nodeSelector: {}
