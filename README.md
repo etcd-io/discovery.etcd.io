@@ -38,10 +38,10 @@ To get the public discovery service running, the following releases have to be i
 traffic from beyond the cluster to internal Kubernetes Services. To install follow instructions in [README](https://github.com/etcd-io/discovery.etcd.io/blob/master/kubernetes/helm/nginx-ingress/README.md).
 * [certmanager](https://github.com/etcd-io/discovery.etcd.io/tree/master/terraform/prod): Is the TLS/SSL certificate management controller, and to
 get it deployed follow the [README](https://github.com/etcd-io/discovery.etcd.io/blob/master/kubernetes/helm/cert-manager/README.md).
-* [prometheus-operator](https://github.com/etcd-io/discovery.etcd.io/tree/master/terraform/dev): Used to create/configure/manage Prometheus clusters atop Kubernetes. To install this operator use the instructions [here](https://github.com/etcd-io/discovery.etcd.io/blob/master/kubernetes/helm/prometheus/README.md).
-* [etcd-operator](https://github.com/etcd-io/discovery.etcd.io/tree/master/terraform/prod): Is used to configure and manage etcd clusters. This is a
+* [prometheus-operator](https://github.com/etcd-io/discovery.etcd.io/blob/master/kubernetes/helm/prometheus): Used to create/configure/manage Prometheus clusters atop Kubernetes. To install this operator use the instructions [here](https://github.com/etcd-io/discovery.etcd.io/blob/master/kubernetes/helm/prometheus/README.md).
+* [etcd-operator](https://github.com/etcd-io/discovery.etcd.io/blob/master/kubernetes/helm/etcd-operator): Is used to configure and manage etcd clusters. This is a
 pre-requisite to have configured properly the discoveryserver release. To install it follow instructions in [README](https://github.com/etcd-io/discovery.etcd.io/blob/master/kubernetes/helm/etcd-operator/README.md).
-* [discoveryserver](https://github.com/etcd-io/discovery.etcd.io/tree/master/terraform/prod): Is a service that bootstrap new etcd clusters using an existing one.
+* [discoveryserver](https://github.com/etcd-io/discovery.etcd.io/blob/master/kubernetes/helm/discoveryserver): Is a service that bootstrap new etcd clusters using an existing one.
 This service helps when the IPs of your cluster peers are not known ahead of time. To install the release follow instructions in [README](https://github.com/etcd-io/discovery.etcd.io/blob/master/kubernetes/helm/discoveryserver/README.md).
 
 ![block diagram of architecture](img/arch.svg)
