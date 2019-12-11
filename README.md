@@ -4,7 +4,7 @@ This repo contains the code to provision the infrastructure and the Kubernetes c
 
 ## Requirements
 
-  * **Helm**  Install latest [verison](https://github.com/helm/helm/releases) for your OS.
+  * **Helm**  ~> v3.0.0 - Install latest [version](https://github.com/helm/helm/releases) for your OS.
   * **Terraform ~> v0.12.15**  Please [download](https://www.terraform.io/downloads.html) the proper package for your operating system and architecture.
 
 ## Building the infrastructure
