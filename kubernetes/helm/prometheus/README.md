@@ -6,25 +6,22 @@ Create the `namespace`:
 $ kubectl create namespace prometheus
 ```
 
-To install the chart with release name `prometheus` run:
+Find the prometheus-operator helm chart latest version [here](https://hub.helm.sh/charts/stable/prometheus-operator) and copy it to the VERSION variable.
 
+```console
+$ export VERSION=8.3.3
+```
+
+To install the chart with release name `prometheus` run:
 
 ```console
 $ export ENV=(dev|prod)
-$ helm upgrade prometheus-operator . --install --namespace prometheus -f $ENV.values.yaml
+$ helm upgrade prometheus-operator stable/prometheus-operator --version ${VERSION} --install --namespace prometheus -f ${ENV}.values.yaml --debug
 ```
 
 The command deploys prometheus-operator on the Kubernetes cluster in custom values configuration. The [configuration](https://github.com/helm/charts/blob/master/stable/prometheus-operator/README.md#configuration) section lists the parameters that can be configured during installation.
 
 The default installation includes Prometheus Operator, Alertmanager, Grafana, and configuration for scraping Kubernetes infrastructure.
-
-## Uninstalling the Chart
-
-To uninstall/delete the `prometheus` deployment:
-
-```console
-$ helm uninstall prometheus -n prometheus
-```
 
 ## Work-Arounds for Known Issues
 
@@ -59,7 +56,7 @@ $ helm install --name my-release stable/prometheus-operator --set prometheusOper
 To uninstall/delete the `prometheus` deployment:
 
 ```console
-$ helm delete prometheus
+$ helm uninstall prometheus-operator -n prometheus
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
