@@ -23,6 +23,8 @@ The infrastructure main code is created per environment, and there are two envir
 * [dev](https://github.com/etcd-io/discovery.etcd.io/tree/master/terraform/dev)
 * [prod](https://github.com/etcd-io/discovery.etcd.io/tree/master/terraform/prod)
 
+Choose an environment - that is, move to the `dev` or to `prod` folder in order to run Terraform commands.
+
 Next step is to apply Terraform for the chosen environment. To ensure that it is configured correctly, apply it and get the expected output, go to the project's [terraform folder](https://github.com/etcd-io/discovery.etcd.io/tree/master/terraform)
 and follow the [README](https://github.com/etcd-io/discovery.etcd.io/blob/master/terraform/README.md) instructions.
 
