@@ -5,8 +5,8 @@
 replicaCount: 3
 
 image:
-  repository: gcr.io/etcd-io-dev/discoveryserver
-  tag: latest
+  repository: gcr.io/etcd-io/discoveryserver
+  tag: "20191213"
   pullPolicy: Always
 
 imagePullSecrets: []
@@ -24,7 +24,7 @@ environment:
   - name: DISC_ETCD
     value: "http://discovery-etcd-cluster-client:2379"
   - name: DISC_HOST
-    value: "https://dev.discovery.etcd.io"
+    value: "http://discovery.etcd.io"
   - name: DISC_MINAGE
     value: "12h"
 
@@ -37,17 +37,17 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
   hosts:
-    - host: dev.discovery.etcd.io
+    - host: discovery.etcd.io
       paths:
         - /
-    - host: www.dev.discovery.etcd.io
+    - host: www.discovery.etcd.io
       paths:
         - /
   tls:
-    - secretName: dev-discoveryserver-tls
+    - secretName: discoveryserver-tls
       hosts:
-        - dev.discovery.etcd.io
-        - www.dev.discovery.etcd.io
+        - discovery.etcd.io
+        - www.discovery.etcd.io
 
 resources:
    limits:
