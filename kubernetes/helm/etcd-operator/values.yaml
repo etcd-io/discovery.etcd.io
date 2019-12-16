@@ -29,7 +29,7 @@ deployments:
   restoreOperator: false
 
 # creates custom resources, not all required,
-# you could use `helm template --values <dev.values.yaml> --name release_name ... `
+# you could use `helm template --values <values.yaml> --name release_name ... `
 # and create the resources yourself to deploy on your cluster later
 customResources:
   createEtcdClusterCRD: true
