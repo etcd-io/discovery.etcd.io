@@ -12,6 +12,5 @@ helm repo add jetstack https://charts.jetstack.io
 helm repo update
 
 # Install 
-export ENV=(dev|prod)
-helm upgrade cert-manager . --install --namespace cert-manager -f $ENV.values.yaml
+helm upgrade cert-manager . --install --namespace cert-manager -f values.yaml
 ```
