@@ -1,5 +1,0 @@
----
-# Source: prometheus-operator/templates/prometheus/rules/kube-scheduler.rules.yaml
-# Generated from 'kube-scheduler.rules' group from https://raw.githubusercontent.com/coreos/prometheus-operator/master/contrib/kube-prometheus/manifests/prometheus-rules.yaml
-# Do not change in-place! In order to change this file first read following link:
-# https://github.com/helm/charts/tree/master/stable/prometheus-operator/hack
