@@ -36,7 +36,7 @@ To get the public discovery service running, the following releases have to be i
 
 * [Nginx Ingress Controller](https://github.com/etcd-io/discovery.etcd.io/tree/master/kubernetes/helm/nginx-ingress): Used for routing 
 traffic from beyond the cluster to internal Kubernetes Services. To install follow instructions in [README](https://github.com/etcd-io/discovery.etcd.io/blob/master/kubernetes/helm/nginx-ingress/README.md).
-* [certmanager](https://github.com/etcd-io/discovery.etcd.io/tree/master/terraform/prod): Is the TLS/SSL certificate management controller, and to
+* [certmanager](https://github.com/etcd-io/discovery.etcd.io/tree/master/kubernetes/helm/cert-manager): Is the TLS/SSL certificate management controller, and to
 get it deployed follow the [README](https://github.com/etcd-io/discovery.etcd.io/blob/master/kubernetes/helm/cert-manager/README.md).
 * [prometheus-operator](https://github.com/etcd-io/discovery.etcd.io/blob/master/kubernetes/helm/prometheus): Used to create/configure/manage Prometheus clusters atop Kubernetes. To install this operator use the instructions [here](https://github.com/etcd-io/discovery.etcd.io/blob/master/kubernetes/helm/prometheus/README.md).
 * [etcd-operator](https://github.com/etcd-io/discovery.etcd.io/blob/master/kubernetes/helm/etcd-operator): Is used to configure and manage etcd clusters. This is a
