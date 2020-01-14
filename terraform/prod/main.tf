@@ -35,7 +35,7 @@ module "gke" {
       auto_upgrade = false
       min_node_count = 1
       max_node_count = 10
-      machine_type = "n1-standard-1"
+      machine_type = "n1-standard-2"
       disk_size_gb = "50"
       preemptible = false
       version = "1.14.6-gke.1"

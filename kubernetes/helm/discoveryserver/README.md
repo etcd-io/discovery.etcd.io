@@ -53,7 +53,7 @@ The following table lists the configurable parameters of the discoveryserver cha
 | `image.repository` | Image repository | `gcr.io/etcd-io-dev/discoveryserver` |
 | `image.tag` | Image tag | `latest` |
 | `image.pullPolicy` | Image pull policy | `Always` |
-| `replicaCount`  | Number of discoveryserver replicas  | `3` |
+| `replicaCount`  | Number of discoveryserver replicas  | `5` |
 | `serviceAccount.create` | If `true`, create a new service account | `true` |
 | `serviceAccount.name` | Service account to be used. If not set and `serviceAccount.create` is `true`, a name is generated using the fullname template | "" |
 | `metrics.enabled`| Enable metrics scraped by prometheus | `true` |
