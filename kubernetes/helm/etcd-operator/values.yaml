@@ -116,7 +116,7 @@ etcdCluster:
     resources:
       limits:
         cpu: 200m
-        memory: 1400Mi
+        memory: 2000Mi
       requests:
         cpu: 100m
         memory: 600Mi
