@@ -72,7 +72,7 @@ etcdOperator:
 ## etcd-cluster specific values
 etcdCluster:
   name: discovery-etcd-cluster
-  size: 3
+  size: 5
   version: 3.2.25
   image:
     repository: quay.io/coreos/etcd
@@ -116,7 +116,7 @@ etcdCluster:
     resources:
       limits:
         cpu: 200m
-        memory: 1200Mi
+        memory: 2000Mi
       requests:
         cpu: 100m
         memory: 600Mi
