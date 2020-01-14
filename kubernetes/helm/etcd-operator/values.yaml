@@ -73,10 +73,10 @@ etcdOperator:
 etcdCluster:
   name: discovery-etcd-cluster
   size: 5
-  version: 3.2.25
+  version: 3.3.18
   image:
     repository: quay.io/coreos/etcd
-    tag: v3.2.25
+    tag: v3.3.18
     pullPolicy: Always
   enableTLS: false
   # TLS configs
@@ -119,7 +119,7 @@ etcdCluster:
         memory: 2000Mi
       requests:
         cpu: 100m
-        memory: 600Mi
+        memory: 1000Mi
     ## Node labels for etcd pod assignment
     ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
     nodeSelector: {}

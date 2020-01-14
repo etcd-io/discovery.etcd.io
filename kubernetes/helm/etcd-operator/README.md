@@ -16,5 +16,6 @@ $ kubectl apply -f crds/etcd-cluster-crd.yaml
 ```
 ## Install etcd-operator from helm repos
 ```bash
-$ helm upgrade etcd-operator stable/etcd-operator --install --namespace discoveryserver -f values.yaml
+$ helm repo update
+$ helm upgrade etcd-operator stable/etcd-operator --install --version 0.10.2 --namespace discoveryserver -f values.yaml
 ```
