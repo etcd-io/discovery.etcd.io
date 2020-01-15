@@ -1,6 +1,0 @@
-kind: ""
-apiversion: ""
-patchesStrategicMerge:
-- prometheus/prometheus.yaml
-bases:
-- ../../base
