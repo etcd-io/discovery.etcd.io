@@ -24,7 +24,7 @@ environment:
   - name: DISC_ETCD
     value: "http://discovery-etcd-cluster-client:2379"
   - name: DISC_HOST
-    value: "http://discovery.etcd.io"
+    value: "https://discovery.etcd.io"
   - name: DISC_MINAGE
     value: "12h"
 
