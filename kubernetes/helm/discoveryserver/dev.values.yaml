@@ -4,10 +4,11 @@
 
 replicaCount: 5
 
+# Images are built using cloudbuild and published to GCP project etcd-io-dev
 image:
   repository: gcr.io/etcd-io-dev/discoveryserver
   tag: latest
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 imagePullSecrets: []
 nameOverride: ""
