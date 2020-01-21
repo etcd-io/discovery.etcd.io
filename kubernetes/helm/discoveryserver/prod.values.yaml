@@ -5,8 +5,8 @@
 replicaCount: 5
 
 image:
-  repository: gcr.io/etcd-io/discoveryserver
-  tag: "20191213"
+  repository: gcr.io/etcd-io-dev/discoveryserver
+  tag: latest
   pullPolicy: Always
 
 imagePullSecrets: []
