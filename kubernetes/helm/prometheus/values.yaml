@@ -24,6 +24,7 @@ grafana:
 ##
 prometheus:
   prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
     storageSpec:
       volumeClaimTemplate:
         spec:
