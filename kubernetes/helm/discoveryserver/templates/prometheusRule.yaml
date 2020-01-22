@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: discovery-server
+  labels:
+    prometheus: prometheus-operator
+    role: alert-rules
+spec:
+  groups:
+    - name: discoveryServer
+      rules:
+        {{ range $index, $promRule := .Values.prometheusRules -}}
+        - alert: {{ $promRule.alert }}
+          for: {{ $promRule.for }}
+          expr:  {{ $promRule.expr }}
+	{{ end }}

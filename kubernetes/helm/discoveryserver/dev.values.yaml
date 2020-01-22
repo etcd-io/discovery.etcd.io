@@ -67,6 +67,9 @@ metrics:
   serviceMonitor:
     enabled: true
     additionalLabels: {}
-    # namespace: monitoring
-    # interval: 30s
-    # scrapeTimeout: 10s
+ 
+prometheusRules:
+  - alert: InsufficientPodsCount
+    for: 1m
+    expr: 'count(kube_pod_info{namespace="discoveryserver", pod=~"discoveryserver.*"}) < 5'
+
