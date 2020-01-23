@@ -7,10 +7,14 @@ metadata:
     role: alert-rules
 spec:
   groups:
-    - name: discoveryServer
+    - name: discovery-server.rules
       rules:
-        {{ range $index, $promRule := .Values.prometheusRules -}}
-        - alert: {{ $promRule.alert }}
+        {{ range $index, $promRule := .Values.prometheusRules.recording -}}
+        - expr:  {{ $promRule.expr }}
+          record: {{ $promRule.record }}
+        {{ end }}
+        {{ range $index, $promRule := .Values.prometheusRules.alerting -}}
+        - expr:  {{ $promRule.expr }}
+          alert: {{ $promRule.alert }}
           for: {{ $promRule.for }}
-          expr:  {{ $promRule.expr }}
-	{{ end }}
+        {{ end }}
