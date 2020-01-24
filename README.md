@@ -28,6 +28,16 @@ Choose an environment - that is, move to the `dev` or to `prod` folder in order 
 Next step is to apply Terraform for the chosen environment. To ensure that it is configured correctly, apply it and get the expected output, go to the project's [terraform folder](https://github.com/etcd-io/discovery.etcd.io/tree/master/terraform)
 and follow the [README](https://github.com/etcd-io/discovery.etcd.io/blob/master/terraform/README.md) instructions.
 
+#### Manual Step
+Once dev and prod infrastructure is built, it is required to update IAM policiesOnce of `artifacts.<dev-project>.appspot.com` GCS bucket adding both dev and prod gke_service_accounts
+as members with the role `roles/storage.objectViewer`. Only after it, clusters in both environments will be able to pull images from gcr.
+
+Gsutil command to update the IAM policy:
+
+`gsutil iam ch serviceAccount:[SERVICE_ACCOUNT_EMAIL]:roles/storage.objectViewer gs://artifacts.<dev-project>.appspot.com`
+
+Note: if you get an error that the `artifacts.<dev-project>.appspot.com` does not exit, push an image and it will beq created.
+
 After applying terraform, a GKE cluster will be up and running in the VPC created. Now the cluster is ready to get deployments.
 
 ## Install Releases with Helm
