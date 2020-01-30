@@ -3,6 +3,8 @@ controller:
     enabled: true
     minReplicas: 3
     maxReplicas: 18
+  replicaCount: 3
+  minAvailable: 1
   metrics:
     enabled: true
     serviceMonitor:
