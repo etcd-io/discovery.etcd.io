@@ -12,9 +12,26 @@ alertmanager:
 ## Using default values from https://github.com/helm/charts/blob/master/stable/grafana/values.yaml
 ##
 grafana:
-  persistence:
-    type: pvc
+  grafana.ini:
+    auth.anonymous:
+      enabled: true
+      org_name: Anonymous
+      org_role: Viewer
+  ingress:
     enabled: true
+    annotations: 
+      cert-manager.io/cluster-issuer: letsencrypt
+      kubernetes.io/ingress.class: nginx
+      kubernetes.io/tls-acme: "true"
+    hosts:
+      - grafana.<ENV>.discovery.etcd.io
+    tls:
+    - hosts:
+      - grafana.<ENV>.discovery.etcd.io
+      secretName: grafana-cert
+  persistence:
+    enabled: true
+    type: pvc
     storageClassName: standard
     accessModes:
       - ReadWriteOnce
@@ -36,3 +53,4 @@ prometheus:
           resources:
             requests:
               storage: 20Gi
+
