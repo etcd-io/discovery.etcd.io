@@ -1,3 +1,7 @@
+## Public metrics
+
+Public metrics are hosted at: https://grafana.prod.discovery.etcd.io/d/uiLwPyPWk/discoveryserver?orgId=2
+
 ## discovery.etcd.io Kubernetes Configurations
 
 This repo contains the code to provision the infrastructure and the Kubernetes configurations to operate the public discovery.etcd.io service.
