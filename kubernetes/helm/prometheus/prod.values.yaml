@@ -1,0 +1,8 @@
+grafana:
+  ingress:
+    hosts:
+      - grafana.prod.discovery.etcd.io
+    tls:
+    - hosts:
+      - grafana.prod.discovery.etcd.io
+      secretName: tls-grafana-cert
