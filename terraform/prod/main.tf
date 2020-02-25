@@ -50,3 +50,12 @@ module "vpc" {
   project = var.project
   region = var.region
 }
+
+module "velero" {
+  source = "git::git@github.com:cloudkite-io/terraform-modules.git//modules/gcp/velero?ref=v0.0.3"
+
+  backups_bucket_location = "US"
+  backups_bucket_name = "${var.project}-backups"
+  project = var.project
+  service_account_name = "${module.gke.name}-velero-sa"
+}
