@@ -1,0 +1,49 @@
+image:
+  repository: velero/velero
+  tag: v1.2.0
+  pullPolicy: IfNotPresent
+
+# Resource requests/limits to specify for the Velero deployment. Optional.
+resources: {}
+
+initContainers:
+   - name: velero-plugin-for-gcp
+     image: velero/velero-plugin-for-gcp:v1.0.0
+     imagePullPolicy: IfNotPresent
+     volumeMounts:
+       - mountPath: /target
+         name: plugins
+
+configuration:
+  provider: gcp
+  backupStorageLocation:
+    name: gcp
+    bucket: etcd-io-dev-backups
+    prefix: velero
+    config:
+      serviceAccount: dev-gke-velero-sa@etcd-io-dev.iam.gserviceaccount.com
+
+  volumeSnapshotLocation:
+    name: gcp
+
+rbac:
+  create: true
+  clusterAdministrator: true
+
+serviceAccount:
+  server:
+    create: true
+    name: velero
+    annotations:
+      iam.gke.io/gcp-service-account: dev-gke-velero-sa@etcd-io-dev.iam.gserviceaccount.com
+
+credentials:
+  useSecret: false
+
+snapshotsEnabled: true
+
+deployRestic: true
+
+schedules:
+  velero-backup:
+    schedule: "30 3 * * *"
