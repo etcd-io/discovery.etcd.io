@@ -1,11 +1,11 @@
 variable "project" {
   description = "The project ID to host the cluster in (required)"
-  type = "string"
+  type = string
 }
 
 variable environment {
   description = "The environment for <development|production> workloads."
-  type = "string"
+  type = string
 }
 
 variable "location" {
@@ -20,7 +20,7 @@ variable "region" {
 
 variable "gke_master_authorized_networks" {
   description = "The networks from which a connection to the master can be established"
-  type        = "list"
+  type        = list(map(string))
 }
 
 variable "network_prefix" {

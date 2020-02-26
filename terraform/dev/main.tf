@@ -17,7 +17,7 @@ terraform {
 }
 
 module "gke" {
-  source = "git::git@github.com:cloudkite-io/terraform-modules.git//modules/gcp/gke?ref=v0.0.2"
+  source = "git::git@github.com:cloudkite-io/terraform-modules.git//modules/gcp/gke?ref=v0.0.4"
   environment = var.environment
   gke_pods_secondary_range_name = module.vpc.gke_subnetwork_secondary_range_name_services
   gke_services_secondary_range_name = module.vpc.gke_subnetwork_secondary_range_name_pods
@@ -44,7 +44,7 @@ module "gke" {
 }
 
 module "vpc" {
-  source = "git::git@github.com:cloudkite-io/terraform-modules.git//modules/gcp/vpc?ref=v0.0.2"
+  source = "git::git@github.com:cloudkite-io/terraform-modules.git//modules/gcp/vpc?ref=v0.0.4"
   environment = var.environment
   network-prefix = var.network_prefix
   project = var.project
@@ -52,7 +52,7 @@ module "vpc" {
 }
 
 module "velero" {
-  source = "git::git@github.com:cloudkite-io/terraform-modules.git//modules/gcp/velero?ref=v0.0.3"
+  source = "git::git@github.com:cloudkite-io/terraform-modules.git//modules/gcp/velero?ref=v0.0.4"
 
   backups_bucket_location = "US"
   backups_bucket_name = "${var.project}-backups"
