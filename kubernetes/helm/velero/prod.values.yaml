@@ -33,7 +33,7 @@ rbac:
 serviceAccount:
   server:
     create: true
-    name:
+    name: velero
     annotations:
       iam.gke.io/gcp-service-account: prod-gke-velero-sa@etcd-io.iam.gserviceaccount.com
 
