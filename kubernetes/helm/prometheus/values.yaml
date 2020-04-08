@@ -1,56 +1,168 @@
-alertmanager:
-  alertmanagerSpec:
-    storage:
-     volumeClaimTemplate:
-       spec:
-         storageClassName: standard
-         accessModes: ["ReadWriteOnce"]
-         resources:
-           requests:
-             storage: 20Gi
-
-## Using default values from https://github.com/helm/charts/blob/master/stable/grafana/values.yaml
-##
-grafana:
-  grafana.ini:
-    auth.anonymous:
+prometheus-operator:
+  ## Using default values from https://github.com/helm/charts/blob/master/stable/grafana/values.yaml
+  ##
+  grafana:
+    grafana.ini:
+      auth.anonymous:
+        enabled: true
+        org_name: Anonymous
+        org_role: Viewer
+    ingress:
       enabled: true
-      org_name: Anonymous
-      org_role: Viewer
-  ingress:
-    enabled: true
-    annotations: 
-      cert-manager.io/cluster-issuer: letsencrypt
-      kubernetes.io/ingress.class: nginx
-      kubernetes.io/tls-acme: "true"
-    hosts:
-      - grafana.<ENV>.discovery.etcd.io
-    tls:
-    - hosts:
-      - grafana.<ENV>.discovery.etcd.io
-      secretName: grafana-cert
-  persistence:
-    enabled: true
-    type: pvc
-    storageClassName: standard
-    accessModes:
-      - ReadWriteOnce
-    size: 20Gi
+      annotations: 
+        cert-manager.io/cluster-issuer: letsencrypt
+        kubernetes.io/ingress.class: nginx
+        kubernetes.io/tls-acme: "true"
+      hosts:
+        - grafana.<ENV>.discovery.etcd.io
+      tls:
+      - hosts:
+        - grafana.<ENV>.discovery.etcd.io
+        secretName: grafana-cert
+    persistence:
+      enabled: true
+      type: pvc
+      storageClassName: standard
+      accessModes:
+        - ReadWriteOnce
+      size: 20Gi
+  
+  ## Deploy a Prometheus instance
+  ##
+  prometheus:
+    prometheusSpec:
+      serviceMonitorSelectorNilUsesHelmValues: false
+      ruleSelectorNilUsesHelmValues: false
+      ruleNamespaceSelector: 
+        any: true
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: standard
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 20Gi
 
-## Deploy a Prometheus instance
-##
-prometheus:
-  prometheusSpec:
-    serviceMonitorSelectorNilUsesHelmValues: false
-    ruleSelectorNilUsesHelmValues: false
-    ruleNamespaceSelector: 
-      any: true
-    storageSpec:
-      volumeClaimTemplate:
-        spec:
-          storageClassName: standard
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 20Gi
-
+  alertmanager:
+    alertmanagerSpec:
+      externalUrl: http://localhost:9093
+      secrets:
+        - prometheus-operator-secret
+      storage:
+       volumeClaimTemplate:
+         spec:
+           storageClassName: standard
+           accessModes: ["ReadWriteOnce"]
+           resources:
+             requests:
+               storage: 20Gi
+    config: 
+      global:
+      # The directory from which notification templates are read.
+      # templates: 
+      # - '/etc/alertmanager/template/*.tmpl'
+        
+      # The root route on which each incoming alert enters.
+      route:
+        # The labels by which incoming alerts are grouped together. For example,
+        # multiple alerts coming in for cluster=A and alertname=LatencyHigh would
+        # be batched into a single group.
+        #
+        # To aggregate by all possible labels use '...' as the sole label name.
+        # This effectively disables aggregation entirely, passing through all
+        # alerts as-is. This is unlikely to be what you want, unless you have
+        # a very low alert volume or your upstream notification system performs
+        # its own grouping. Example: group_by: [...]
+        group_by: ['alertname', 'cluster', 'service']
+        
+        # When a new group of alerts is created by an incoming alert, wait at
+        # least 'group_wait' to send the initial notification.
+        # This way ensures that you get multiple alerts for the same group that start
+        # firing shortly after another are batched together on the first 
+        # notification.
+        group_wait: 30s
+        
+        # When the first notification was sent, wait 'group_interval' to send a batch
+        # of new alerts that started firing for that group.
+        group_interval: 2m
+        
+        # repeat_interval: 3h 
+        
+        # A default receiver
+        receiver: blackhole
+        
+        # All the above attributes are inherited by all child routes and can 
+        # overwritten on each.
+        
+        # The child route trees.
+        routes:
+        - match:
+            cloudkite: true
+          receiver: cloudkite-slack
+        - match:
+            severity: critical
+          receiver: cloudkite-slack
+        # This routes performs a regular expression match on alert labels to
+        # catch alerts that are related to a list of services.
+        # - match_re:
+        #     service: ^(foo1|foo2|baz)$
+        #   receiver: team-X-mails
+        #   # The service has a sub-route for critical alerts, any alerts
+        #   # that do not match, i.e. severity != critical, fall-back to the
+        #   # parent node and are sent to 'team-X-mails'
+        #   routes:
+        #   - match:
+        #       severity: critical
+        #     receiver: team-X-pager
+        # - match:
+        #     service: files
+        #   receiver: team-Y-mails
+        
+        #   routes:
+        #   - match:
+        #       severity: critical
+        #     receiver: team-Y-pager
+        
+        # This route handles all alerts coming from a database service. If there's
+        # no team to handle it, it defaults to the DB team.
+        # - match:
+        #     service: database
+        #   receiver: team-DB-pager
+        #   # Also group alerts by affected database.
+        #   group_by: [alertname, cluster, database]
+        #   routes:
+        #   - match:
+        #       owner: team-X
+        #     receiver: team-X-pager
+        #     continue: true
+        #   - match:
+        #       owner: team-Y
+        #     receiver: team-Y-pager
+        
+        
+      # Inhibition rules allow to mute a set of alerts given that another alert is
+      # firing.
+      # We use this to mute any warning-level notifications if the same alert is 
+      # already critical.
+      inhibit_rules:
+      - source_match:
+          severity: critical
+        target_match:
+          severity: warning
+        # Apply inhibition if the alertname is the same.
+        equal: ['alertname', 'cluster', 'service']
+        
+        
+      receivers:
+      - name: blackhole
+      - name: cloudkite-slack
+        slack_configs:
+        - api_url: '{{ template "slack.api_url" . }}'
+          send_resolved: true
+          channel: '#911'
+          username: prometheus alertmanager
+        
+      templates:
+      - /etc/alertmanager/secrets/prometheus-operator-secret/alertmanager.tmpl
+         
