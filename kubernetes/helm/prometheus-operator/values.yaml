@@ -1,24 +1,32 @@
+configMap:
+  name: grafana
+  grafanaConfig: custom.ini
+
 prometheus-operator:
-  ## Using default values from https://github.com/helm/charts/blob/master/stable/grafana/values.yaml
-  ##
   grafana:
-    grafana.ini:
-      auth.anonymous:
-        enabled: true
-        org_name: Anonymous
-        org_role: Viewer
+    adminPassword: <MUST CHANGE>
+    defaultDashboardsEnabled: true
+    extraConfigmapMounts: 
+    - name: grafana
+      mountPath: /etc/grafana/grafana-custom.ini
+      subPath: grafana.ini
+      configMap: prometheus-operator-custom
+      readOnly: true
+    env:
+      GF_PATHS_CONFIG: /etc/grafana/grafana-custom.ini
+    envFromSecret: prometheus-operator
     ingress:
-      enabled: true
+      enabled: false
       annotations: 
-        cert-manager.io/cluster-issuer: letsencrypt
-        kubernetes.io/ingress.class: nginx
+        certmanager.k8s.io/cluster-issuer: letsencrypt
+        kubernetes.io/ingress.class: "nginx"
         kubernetes.io/tls-acme: "true"
-      hosts:
-        - grafana.<ENV>.discovery.etcd.io
-      tls:
-      - hosts:
-        - grafana.<ENV>.discovery.etcd.io
-        secretName: grafana-cert
+      # hosts:
+      #   - grafana.gcp.dev.cloudkite.io
+      # tls:
+      # - hosts:
+      #   - grafana.gcp.dev.cloudkite.io
+      #   secretName: dev-cloudkite-grafana
     persistence:
       enabled: true
       type: pvc
@@ -26,11 +34,10 @@ prometheus-operator:
       accessModes:
         - ReadWriteOnce
       size: 20Gi
-  
-  ## Deploy a Prometheus instance
-  ##
+
   prometheus:
     prometheusSpec:
+      enableAdminAPI: true
       serviceMonitorSelectorNilUsesHelmValues: false
       ruleSelectorNilUsesHelmValues: false
       ruleNamespaceSelector: 
@@ -43,12 +50,28 @@ prometheus-operator:
             resources:
               requests:
                 storage: 20Gi
+    ingress:
+      enabled: false
+      annotations:
+        certmanager.k8s.io/cluster-issuer: letsencrypt
+        kubernetes.io/ingress.class: "nginx"
+        kubernetes.io/tls-acme: "true"
+        certmanager.k8s.io/cluster-issuer: letsencrypt
+        ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/auth-type: basic
+        nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
+        nginx.ingress.kubernetes.io/auth-secret: prometheus-operator
+      # hosts:
+      #   - prometheus.gcp.dev.cloudkite.io
+      # tls:
+      # - hosts:
+      #   - prometheus.gcp.dev.cloudkite.io
+      #   secretName: dev-cloudkite-prometheus
 
   alertmanager:
     alertmanagerSpec:
-      externalUrl: http://localhost:9093
       secrets:
-        - prometheus-operator-secret
+        - prometheus-operator-custom
       storage:
        volumeClaimTemplate:
          spec:
@@ -57,11 +80,28 @@ prometheus-operator:
            resources:
              requests:
                storage: 20Gi
+    ingress:
+      enabled: false
+      annotations:
+        certmanager.k8s.io/cluster-issuer: letsencrypt
+        ingress.kubernetes.io/ssl-redirect: "true"
+        kubernetes.io/ingress.class: "nginx"
+        kubernetes.io/tls-acme: "true"
+        nginx.ingress.kubernetes.io/auth-type: basic
+        nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
+        nginx.ingress.kubernetes.io/auth-secret: prometheus-operator
+      # hosts:
+      #   - alertmanager.gcp.dev.cloudkite.io
+      # tls:
+      # - hosts:
+      #   - alertmanager.gcp.dev.cloudkite.io
+      #   secretName: dev-cloudkite-alertmanager
+
     config: 
       global:
       # The directory from which notification templates are read.
-      # templates: 
-      # - '/etc/alertmanager/template/*.tmpl'
+      templates:
+      - '/etc/alertmanager/secrets/prometheus-operator-custom/*.tmpl'
         
       # The root route on which each incoming alert enters.
       route:
@@ -156,13 +196,10 @@ prometheus-operator:
         
       receivers:
       - name: blackhole
-      - name: cloudkite-slack
+      - name: org-slack
         slack_configs:
-        - api_url: '{{ template "slack.api_url" . }}'
+        - api_url: '<secret slack url'
           send_resolved: true
           channel: '#911'
           username: prometheus alertmanager
-        
-      templates:
-      - /etc/alertmanager/secrets/prometheus-operator-secret/alertmanager.tmpl
          
