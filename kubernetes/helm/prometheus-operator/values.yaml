@@ -22,11 +22,11 @@ prometheus-operator:
         kubernetes.io/ingress.class: "nginx"
         kubernetes.io/tls-acme: "true"
       # hosts:
-      #   - grafana.gcp.dev.cloudkite.io
+      #   - grafana.domain.com
       # tls:
       # - hosts:
-      #   - grafana.gcp.dev.cloudkite.io
-      #   secretName: dev-cloudkite-grafana
+      #   - grafana.domain.com
+      #   secretName: dev-domain-grafana
     persistence:
       enabled: true
       type: pvc
@@ -62,11 +62,11 @@ prometheus-operator:
         nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
         nginx.ingress.kubernetes.io/auth-secret: prometheus-operator
       # hosts:
-      #   - prometheus.gcp.dev.cloudkite.io
+      #   - prometheus.domain.com
       # tls:
       # - hosts:
-      #   - prometheus.gcp.dev.cloudkite.io
-      #   secretName: dev-cloudkite-prometheus
+      #   - prometheus.domain.com
+      #   secretName: dev-domain-prometheus
 
   alertmanager:
     alertmanagerSpec:
@@ -91,11 +91,11 @@ prometheus-operator:
         nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
         nginx.ingress.kubernetes.io/auth-secret: prometheus-operator
       # hosts:
-      #   - alertmanager.gcp.dev.cloudkite.io
+      #   - alertmanager.domain.com
       # tls:
       # - hosts:
-      #   - alertmanager.gcp.dev.cloudkite.io
-      #   secretName: dev-cloudkite-alertmanager
+      #   - alertmanager.domain.com
+      #   secretName: dev-domain-alertmanager
 
     config: 
       global:
@@ -138,7 +138,7 @@ prometheus-operator:
         # The child route trees.
         routes:
         - match:
-            cloudkite: true
+            cloudkite: "true"
           receiver: cloudkite-slack
         - match:
             severity: critical
