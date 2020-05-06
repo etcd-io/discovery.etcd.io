@@ -1,0 +1,4 @@
+*.secrets.yaml
+!example.secrets.yaml
+*auth
+

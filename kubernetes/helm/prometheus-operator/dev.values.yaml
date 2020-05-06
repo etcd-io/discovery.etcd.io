@@ -1,0 +1,32 @@
+prometheus-operator:
+  grafana:
+    env:
+      GF_SERVER_ROOT_URL: "https://grafana.dev.discovery.etcd.io"
+    ingress:
+      enabled: true
+      hosts:
+        - grafana.dev.discovery.etcd.io
+      tls:
+      - hosts:
+        - grafana.dev.discovery.etcd.io
+        secretName: dev-discovery-grafana
+  prometheus:
+    ingress:
+      enabled: true
+      hosts:
+        - prometheus.dev.discovery.etcd.io
+      tls:
+      - hosts:
+        - prometheus.dev.discovery.etcd.io
+        secretName: dev-discovery-prometheus
+  alertmanager:
+    alertmanagerSpec:
+      externalUrl: https://alertmanager.dev.discovery.etcd.io
+    ingress:
+      enabled: true
+      hosts:
+        - alertmanager.dev.discovery.etcd.io
+      tls:
+      - hosts:
+        - alertmanager.dev.discovery.etcd.io
+        secretName: dev-discovery-alertmanager

@@ -5,6 +5,7 @@ metadata:
   labels:
     prometheus: prometheus-operator
     role: alert-rules
+    {{- toYaml .Values.prometheusRules.labels | nindent 4 }}
 spec:
   groups:
     - name: discovery-server.rules
@@ -12,9 +13,13 @@ spec:
         {{ range $index, $promRule := .Values.prometheusRules.recording -}}
         - expr:  {{ $promRule.expr }}
           record: {{ $promRule.record }}
+          labels:
+            {{- toYaml $promRule.labels | nindent 12 }}
         {{ end }}
         {{ range $index, $promRule := .Values.prometheusRules.alerting -}}
         - expr:  {{ $promRule.expr }}
           alert: {{ $promRule.alert }}
           for: {{ $promRule.for }}
+          labels:
+            {{- toYaml $promRule.labels | nindent 12 }}
         {{ end }}
