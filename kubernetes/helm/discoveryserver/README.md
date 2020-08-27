@@ -29,7 +29,7 @@ To install the chart with the release name `discoveryserver` in the namespace `d
 
 ```console
 $ export ENV=(dev|prod)
-$ helm upgrade discoveryserver . --install --namespace discoveryserver -f ${ENV}.values.yaml --debug
+$ helm upgrade discoveryserver . --install --namespace discoveryserver -f ${ENV}.values.yaml --debug --atomic
 ```
 
 The command deploys discoveryserver on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
