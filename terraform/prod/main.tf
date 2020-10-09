@@ -38,8 +38,8 @@ module "gke" {
       machine_type = "n1-standard-2"
       disk_size_gb = "50"
       preemptible = false
-      version = "1.14.6-gke.1"
-    },
+      version = var.min_master_version
+    }
   ]
 }
 
