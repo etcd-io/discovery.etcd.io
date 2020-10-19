@@ -31,16 +31,16 @@ module "gke" {
 
   gke_nodepools = [
     #Scaling down dev cluster to 0 while not needed
-    /*{
-        auto_repair = true
-        auto_upgrade = false
-        min_node_count = 1
-        max_node_count = 10
-        machine_type = "n1-standard-2"
-        disk_size_gb = "50"
-        preemptible = false
-        version = "1.14.6-gke.1"
-      },*/
+    # {
+    #     auto_repair = true
+    #     auto_upgrade = false
+    #     min_node_count = 1
+    #     max_node_count = 10
+    #     machine_type = "n1-standard-2"
+    #     disk_size_gb = "50"
+    #     preemptible = false
+    #     version = var.min_master_version
+    #   },
   ]
 }
 
