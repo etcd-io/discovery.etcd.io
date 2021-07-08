@@ -1,10 +1,10 @@
 # Prometheus Operator
 Installs prometheus, grafana, and alertmanager
-Reference: https://github.com/helm/charts/tree/master/stable/prometheus-operator#prometheus-operator
+Reference: https://github.com/helm/charts/tree/master/stable/kube-prometheus-stack#kube-prometheus-stack
 
 ## Alerts
 Alerts are handled by alertmanager. To configure, add edit the `alertmanager` section in the values.yaml file. 
-Reference: https://github.com/helm/charts/tree/master/stable/prometheus-operator#alertmanager 
+Reference: https://github.com/helm/charts/tree/master/stable/kube-prometheus-stack#alertmanager 
 
 ## Authentication
 For Grafana, we are using it's built-in authentication: https://grafana.com/docs/grafana/latest/auth/overview/ ,
@@ -17,7 +17,7 @@ $ cp example.secrets.yaml <env>.secrets.yaml
 ```
 
 ## Setup Grafana auth
-The simplest setup would be to set the `prometheus-operator.grafana.adminPassword` to some value.
+The simplest setup would be to set the `kube-prometheus-stack.grafana.adminPassword` to some value.
 This can be done by copying `example.secrets.yaml`
 
 ## Setup Basic Auth:
