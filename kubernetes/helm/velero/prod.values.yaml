@@ -1,7 +1,7 @@
-image:
-  repository: velero/velero
-  tag: v1.2.0
-  pullPolicy: IfNotPresent
+# image:
+#   repository: velero/velero
+#   tag: v1.2.0
+#   pullPolicy: IfNotPresent
 
 # Resource requests/limits to specify for the Velero deployment. Optional.
 resources: {}
@@ -45,5 +45,14 @@ snapshotsEnabled: true
 deployRestic: true
 
 schedules:
-  velero-backup:
-    schedule: "30 3 * * *"
+  gcp:
+    schedule: "30 9 * * *"
+    template:
+      storageLocation: gcp
+      includeClusterResources: true
+      includedNamespaces:
+        - '*'
+      includedResources:
+        - '*'
+      snapshotVolumes: true
+      ttl: "720h"

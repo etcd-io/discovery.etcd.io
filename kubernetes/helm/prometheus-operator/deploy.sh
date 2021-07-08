@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-app=prometheus-operator
+app=kube-prometheus-stack
 env=$1
 
-helm3 upgrade --atomic --debug --install --namespace prometheus --values values.yaml,$env.values.yaml,$env.secrets.yaml $app .
+helm upgrade --atomic --debug --install --create-namespace --timeout 900s --namespace kube-prometheus-stack --values values.yaml,$env.values.yaml $app .

@@ -2,7 +2,7 @@ configMap:
   name: grafana
   grafanaConfig: custom.ini
 
-prometheus-operator:
+kube-prometheus-stack:
   grafana:
     adminPassword: <MUST CHANGE>
     defaultDashboardsEnabled: true
@@ -10,11 +10,11 @@ prometheus-operator:
     - name: grafana
       mountPath: /etc/grafana/grafana-custom.ini
       subPath: grafana.ini
-      configMap: prometheus-operator-custom
+      configMap: kube-prometheus-stack-custom
       readOnly: true
     env:
       GF_PATHS_CONFIG: /etc/grafana/grafana-custom.ini
-    envFromSecret: prometheus-operator
+    envFromSecret: kube-prometheus-stack
     ingress:
       enabled: false
       annotations: 
@@ -53,14 +53,14 @@ prometheus-operator:
     ingress:
       enabled: false
       annotations:
-        certmanager.k8s.io/cluster-issuer: letsencrypt
+        cert-manager.k8s.io/cluster-issuer: letsencrypt
         kubernetes.io/ingress.class: "nginx"
         kubernetes.io/tls-acme: "true"
         certmanager.k8s.io/cluster-issuer: letsencrypt
         ingress.kubernetes.io/ssl-redirect: "true"
         nginx.ingress.kubernetes.io/auth-type: basic
         nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
-        nginx.ingress.kubernetes.io/auth-secret: prometheus-operator
+        nginx.ingress.kubernetes.io/auth-secret: kube-prometheus-stack
       # hosts:
       #   - prometheus.domain.com
       # tls:
@@ -71,15 +71,16 @@ prometheus-operator:
   alertmanager:
     alertmanagerSpec:
       secrets:
-        - prometheus-operator-custom
+        - kube-prometheus-stack-custom
       storage:
-       volumeClaimTemplate:
-         spec:
-           storageClassName: standard
-           accessModes: ["ReadWriteOnce"]
-           resources:
-             requests:
-               storage: 20Gi
+        volumeClaimTemplate:
+          spec:
+            storageClassName: standard
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 20Gi
+
     ingress:
       enabled: false
       annotations:
@@ -89,7 +90,7 @@ prometheus-operator:
         kubernetes.io/tls-acme: "true"
         nginx.ingress.kubernetes.io/auth-type: basic
         nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
-        nginx.ingress.kubernetes.io/auth-secret: prometheus-operator
+        nginx.ingress.kubernetes.io/auth-secret: kube-prometheus-stack
       # hosts:
       #   - alertmanager.domain.com
       # tls:
@@ -101,7 +102,7 @@ prometheus-operator:
       global:
       # The directory from which notification templates are read.
       templates:
-      - '/etc/alertmanager/secrets/prometheus-operator-custom/*.tmpl'
+      - '/etc/alertmanager/secrets/kube-prometheus-stack-custom/*.tmpl'
         
       # The root route on which each incoming alert enters.
       route:
@@ -202,4 +203,3 @@ prometheus-operator:
           send_resolved: true
           channel: '#911'
           username: prometheus alertmanager
-         
