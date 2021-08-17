@@ -40,8 +40,10 @@ kube-prometheus-stack:
       enableAdminAPI: true
       serviceMonitorSelectorNilUsesHelmValues: false
       ruleSelectorNilUsesHelmValues: false
-      ruleNamespaceSelector: 
-        any: true
+      ruleNamespaceSelector:
+        matchExpressions:
+        - key: "non-existent-label"
+          operator: "DoesNotExist"
       storageSpec:
         volumeClaimTemplate:
           spec:
@@ -193,13 +195,4 @@ kube-prometheus-stack:
           severity: warning
         # Apply inhibition if the alertname is the same.
         equal: ['alertname', 'cluster', 'service']
-        
-        
-      receivers:
-      - name: blackhole
-      - name: org-slack
-        slack_configs:
-        - api_url: '<secret slack url'
-          send_resolved: true
-          channel: '#911'
-          username: prometheus alertmanager
+
