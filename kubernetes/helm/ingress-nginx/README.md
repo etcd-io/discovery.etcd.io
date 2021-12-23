@@ -17,5 +17,5 @@ $ kubectl create namespace nginx-ingress
 ### Install from helm hub
 
 ```bash
-helm upgrade nginx-ingress stable/nginx-ingress --install --namespace nginx-ingress -f values.yaml --version ${VERSION} --atomic --debug
+helm upgrade ingress-nginx ingress-nginx/ingress-nginx --install --create-namespace --namespace ingress-nginx -f values.yaml --version ${version} --atomic --debug
 ```
