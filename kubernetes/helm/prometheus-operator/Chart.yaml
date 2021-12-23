@@ -1,9 +1,9 @@
 apiVersion: v2
-appVersion: "0.48.1"
+appVersion: "0.53.1"
 description: Prometheus operator helm chart
 name: kube-prometheus-stack
-version: 16.12.0
+version: 25.1.0
 dependencies:
   - name: kube-prometheus-stack
-    version: "16.12.0"
+    version: "25.1.0"
     repository: "@prometheus-community"
