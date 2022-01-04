@@ -3,14 +3,14 @@ controller:
     enabled: true
     minReplicas: 3
     maxReplicas: 18
-    targetCPUUtilizationPercentage: 75
-    targetMemoryUtilizationPercentage: 75
+    targetCPUUtilizationPercentage: "90"
+    targetMemoryUtilizationPercentage: "90"
   replicaCount: 3
   minAvailable: 2
   resources:
     limits:
-      cpu: 1
-      memory: 300Mi
+      cpu: 200m
+      memory: 512Mi
     requests:
       cpu: 100m
       memory: 256Mi
