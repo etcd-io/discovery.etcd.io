@@ -1,0 +1,5 @@
+replicaCount: 5
+
+auth:
+  rbac:
+    enabled: false
