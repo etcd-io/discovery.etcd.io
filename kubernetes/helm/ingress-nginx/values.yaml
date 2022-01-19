@@ -9,12 +9,12 @@ controller:
   minAvailable: 2
   resources:
     limits:
-      cpu: 200m
-      memory: 512Mi
+      cpu: 2
+      memory: 350Mi
     requests:
       cpu: 100m
-      memory: 256Mi
-  
+      memory: 300Mi
+
   metrics:
     enabled: true
     serviceMonitor:
