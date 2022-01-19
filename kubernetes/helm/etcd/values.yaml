@@ -5,6 +5,4 @@ auth:
     enabled: false
 
 metrics:
-  ## @param metrics.enabled Expose etcd metrics
-  ##
   enabled: true
