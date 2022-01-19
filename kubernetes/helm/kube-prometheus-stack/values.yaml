@@ -38,6 +38,7 @@ kube-prometheus-stack:
   prometheus:
     prometheusSpec:
       enableAdminAPI: true
+      podMonitorSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
       ruleSelectorNilUsesHelmValues: false
       ruleNamespaceSelector:
