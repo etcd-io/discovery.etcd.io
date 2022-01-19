@@ -5,4 +5,5 @@
 *.tfstate.*
 
 .DS_Store
-.vscode
+.vscode*
+.terraform.lock.hcl

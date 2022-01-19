@@ -1,9 +1,0 @@
-apiVersion: v2
-appVersion: "0.34.0"
-description: Prometheus operator helm chart
-name: prometheus-operator
-version: 0.1.0
-dependencies:
-  - name: prometheus-operator
-    version: "8.3.3"
-    repository: "@stable"

@@ -1,0 +1,21 @@
+controller:
+  autoscaling:
+    enabled: true
+    minReplicas: 3
+    maxReplicas: 18
+    targetCPUUtilizationPercentage: "90"
+    targetMemoryUtilizationPercentage: "90"
+  replicaCount: 3
+  minAvailable: 2
+  resources:
+    limits:
+      cpu: 2
+      memory: 350Mi
+    requests:
+      cpu: 100m
+      memory: 300Mi
+
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true

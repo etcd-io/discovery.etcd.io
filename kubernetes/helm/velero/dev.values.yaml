@@ -1,18 +1,18 @@
-image:
-  repository: velero/velero
-  tag: v1.2.0
-  pullPolicy: IfNotPresent
+# image:
+#   repository: velero/velero
+#   tag: v1.2.0
+#   pullPolicy: IfNotPresent
 
 # Resource requests/limits to specify for the Velero deployment. Optional.
 resources: {}
 
 initContainers:
-   - name: velero-plugin-for-gcp
-     image: velero/velero-plugin-for-gcp:v1.0.0
-     imagePullPolicy: IfNotPresent
-     volumeMounts:
-       - mountPath: /target
-         name: plugins
+  - name: velero-plugin-for-gcp
+    image: velero/velero-plugin-for-gcp:v1.0.0
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+      - mountPath: /target
+        name: plugins
 
 configuration:
   provider: gcp
@@ -40,10 +40,15 @@ serviceAccount:
 credentials:
   useSecret: false
 
-snapshotsEnabled: true
-
-deployRestic: true
-
 schedules:
-  velero-backup:
-    schedule: "30 3 * * *"
+  gcp:
+    schedule: "30 9 * * *"
+    template:
+      storageLocation: gcp
+      includeClusterResources: true
+      includedNamespaces:
+        - '*'
+      includedResources:
+        - '*'
+      snapshotVolumes: true
+      ttl: "720h"
