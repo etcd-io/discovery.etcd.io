@@ -1,0 +1,9 @@
+apiVersion: v2
+appVersion: "0.53.1"
+description: Prometheus operator helm chart
+name: kube-prometheus-stack
+version: 30.0.1
+dependencies:
+  - name: kube-prometheus-stack
+    version: "30.0.1"
+    repository: "@prometheus-community"

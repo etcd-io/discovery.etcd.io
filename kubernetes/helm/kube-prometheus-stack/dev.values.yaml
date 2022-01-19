@@ -1,4 +1,4 @@
-prometheus-operator:
+kube-prometheus-stack:
   grafana:
     env:
       GF_SERVER_ROOT_URL: "https://grafana.dev.discovery.etcd.io"
@@ -6,6 +6,7 @@ prometheus-operator:
       enabled: true
       hosts:
         - grafana.dev.discovery.etcd.io
+      pathType: Prefix
       tls:
       - hosts:
         - grafana.dev.discovery.etcd.io
@@ -15,6 +16,7 @@ prometheus-operator:
       enabled: true
       hosts:
         - prometheus.dev.discovery.etcd.io
+      pathType: Prefix
       tls:
       - hosts:
         - prometheus.dev.discovery.etcd.io
@@ -26,6 +28,7 @@ prometheus-operator:
       enabled: true
       hosts:
         - alertmanager.dev.discovery.etcd.io
+      pathType: Prefix
       tls:
       - hosts:
         - alertmanager.dev.discovery.etcd.io
