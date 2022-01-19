@@ -6,3 +6,6 @@ auth:
 
 metrics:
   enabled: true
+  podMonitor:
+    enabled: true
+    namespace: prometheus
