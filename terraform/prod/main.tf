@@ -1,14 +1,24 @@
 provider "google" {
-  version = "~> 2.16.0"
   project     = var.project
   region      = var.region
 }
 
 provider "google-beta" {
-  version     = "~> 3.73.0"
   project     = var.project
   region      = var.region
 }
+
+terraform {
+  required_providers {
+    google = {
+      version = "~> 2.16.0"
+    }
+    google-beta = {
+      version = "~> 3.73.0"
+    }
+  }
+}
+
 
 terraform {
   backend "gcs" {
