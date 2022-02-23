@@ -7,7 +7,7 @@ https://artifacthub.io/packages/helm/bitnami/etcd
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 # Install
-helm install etcd bitnami/etcd --version 6.12.2 --namespace discoveryserver --f values.yaml
+helm install etcd bitnami/etcd --version 6.13.4 --namespace discoveryserver -f values.yaml
 # Upgrade
-helm upgrade etcd bitnami/etcd --version 6.12.2 --namespace discoveryserver --debug -f values.yaml
+helm upgrade etcd bitnami/etcd --version 6.13.4 --namespace discoveryserver --debug -f values.yaml
 ```

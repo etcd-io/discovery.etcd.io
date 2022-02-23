@@ -2,10 +2,26 @@ replicaCount: 5
 
 auth:
   rbac:
-    enabled: false
+    create: false
+
+autoCompactionMode: periodic
+autoCompactionRetention: 10m
+
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 120
+  timeoutSeconds: 15
 
 metrics:
   enabled: true
   podMonitor:
     enabled: true
     namespace: prometheus
+
+persistence:
+  size: 20Gi
+
+resources:
+  requests:
+    cpu: "1"
+    memory: "3500Mi"
