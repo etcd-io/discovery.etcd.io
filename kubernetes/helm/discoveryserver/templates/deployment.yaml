@@ -43,7 +43,7 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /metrics
+              path: /health
               port: http
           readinessProbe:
             httpGet:
