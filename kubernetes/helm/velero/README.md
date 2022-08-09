@@ -3,7 +3,7 @@
 Get the latest version of the velero helm chart [here](https://github.com/vmware-tanzu/helm-charts/tree/master/charts/velero).
 
 ```console
-$ export VERSION=2.8.2
+$ export VERSION=2.30.2
 ```
 
 ## Installing the Chart

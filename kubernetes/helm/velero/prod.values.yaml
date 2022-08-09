@@ -8,7 +8,7 @@ resources: {}
 
 initContainers:
   - name: velero-plugin-for-gcp
-    image: velero/velero-plugin-for-gcp:v1.4.1
+    image: velero/velero-plugin-for-gcp:v1.5.0
     imagePullPolicy: IfNotPresent
     volumeMounts:
       - mountPath: /target
@@ -17,6 +17,7 @@ initContainers:
 configuration:
   provider: gcp
   backupStorageLocation:
+    default: true
     name: gcp
     bucket: etcd-io-backups
     prefix: velero
