@@ -1,0 +1,6 @@
+dependencies:
+- name: version-checker
+  repository: https://ymrsmns.github.io/helm-charts
+  version: 0.2.3
+digest: sha256:4a37b8f2cdd35a3894c68650bf94889ad3bc7214b08fa3cef6a4d6de2278d62b
+generated: "2023-02-20T18:08:57.197603028+01:00"
