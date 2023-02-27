@@ -19,6 +19,30 @@ kube-prometheus-stack:
       - hosts:
         - prometheus.prod.discovery.etcd.io
         secretName: prod-discovery-prometheus
+    prometheusSpec:
+      remoteWrite:
+        - url: https://mimir-discovery.prod.cloudkite.io/api/v1/push
+          basicAuth:
+            username:
+              name: basic-auth-creds
+              key: username
+            password:
+              name: basic-auth-creds
+              key: password
+          headers:
+            X-Scope-OrgID: discovery
+          writeRelabelConfigs:
+            - sourceLabels:
+                - "__name__"
+              regex: "kubernetes_build_info|version_checker_is_latest_version"
+              action: "keep"
+          queueConfig:
+            capacity: 5000
+            maxSamplesPerSend: 1000
+            maxShards: 100
+      externalLabels:
+        cluster: discovery
+
   alertmanager:
     alertmanagerSpec:
       externalUrl: https://alertmanager.prod.discovery.etcd.io

@@ -1,0 +1,10 @@
+apiVersion: v2
+name: version-checker
+description: Helm chart for Prometheus
+type: application
+version: 0.1.0
+dependencies:
+  - name: version-checker
+    appVersion: v0.2.1
+    version: 0.2.3
+    repository: https://ymrsmns.github.io/helm-charts
