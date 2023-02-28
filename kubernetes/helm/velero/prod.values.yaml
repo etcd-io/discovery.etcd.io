@@ -43,7 +43,7 @@ credentials:
 
 snapshotsEnabled: true
 
-deployRestic: true
+deployNodeAgent: true
 
 schedules:
   gcp:
@@ -52,8 +52,8 @@ schedules:
       storageLocation: gcp
       includeClusterResources: true
       includedNamespaces:
-        - '*'
+        - "*"
       includedResources:
-        - '*'
+        - "*"
       snapshotVolumes: true
       ttl: "720h"
