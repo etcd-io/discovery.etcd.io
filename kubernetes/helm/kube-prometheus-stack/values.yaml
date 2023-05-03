@@ -37,7 +37,7 @@ kube-prometheus-stack:
     grafana.ini:
       auth.anonymous:
         enabled: true
-        org_name: Anonymous
+        org_name: Main Org.
         org_role: Viewer
   prometheus:
     prometheusSpec:
