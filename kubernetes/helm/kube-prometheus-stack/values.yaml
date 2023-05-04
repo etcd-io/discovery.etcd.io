@@ -6,14 +6,6 @@ kube-prometheus-stack:
   grafana:
     adminPassword: cloudkitetesting
     defaultDashboardsEnabled: true
-    extraConfigmapMounts:
-      - name: grafana
-        mountPath: /etc/grafana/grafana-custom.ini
-        subPath: grafana.ini
-        configMap: kube-prometheus-stack-custom
-        readOnly: true
-    env:
-      GF_PATHS_CONFIG: /etc/grafana/grafana-custom.ini
     envFromSecret: kube-prometheus-stack
     ingress:
       enabled: false
