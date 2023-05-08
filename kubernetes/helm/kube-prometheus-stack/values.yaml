@@ -4,20 +4,12 @@ configMap:
 
 kube-prometheus-stack:
   grafana:
-    adminPassword: <MUST CHANGE>
+    adminPassword: cloudkitetesting
     defaultDashboardsEnabled: true
-    extraConfigmapMounts: 
-    - name: grafana
-      mountPath: /etc/grafana/grafana-custom.ini
-      subPath: grafana.ini
-      configMap: kube-prometheus-stack-custom
-      readOnly: true
-    env:
-      GF_PATHS_CONFIG: /etc/grafana/grafana-custom.ini
     envFromSecret: kube-prometheus-stack
     ingress:
       enabled: false
-      annotations: 
+      annotations:
         certmanager.k8s.io/cluster-issuer: letsencrypt
         kubernetes.io/ingress.class: "nginx"
         kubernetes.io/tls-acme: "true"
@@ -34,7 +26,11 @@ kube-prometheus-stack:
       accessModes:
         - ReadWriteOnce
       size: 20Gi
-
+    grafana.ini:
+      auth.anonymous:
+        enabled: true
+        org_name: Main Org.
+        org_role: Viewer
   prometheus:
     prometheusSpec:
       enableAdminAPI: true
@@ -43,8 +39,8 @@ kube-prometheus-stack:
       ruleSelectorNilUsesHelmValues: false
       ruleNamespaceSelector:
         matchExpressions:
-        - key: "non-existent-label"
-          operator: "DoesNotExist"
+          - key: "non-existent-label"
+            operator: "DoesNotExist"
       storageSpec:
         volumeClaimTemplate:
           spec:
@@ -101,12 +97,12 @@ kube-prometheus-stack:
       #   - alertmanager.domain.com
       #   secretName: dev-domain-alertmanager
 
-    config: 
+    config:
       global:
       # The directory from which notification templates are read.
       templates:
-      - '/etc/alertmanager/secrets/kube-prometheus-stack-custom/*.tmpl'
-        
+        - "/etc/alertmanager/secrets/kube-prometheus-stack-custom/*.tmpl"
+
       # The root route on which each incoming alert enters.
       route:
         # The labels by which incoming alerts are grouped together. For example,
@@ -118,35 +114,35 @@ kube-prometheus-stack:
         # alerts as-is. This is unlikely to be what you want, unless you have
         # a very low alert volume or your upstream notification system performs
         # its own grouping. Example: group_by: [...]
-        group_by: ['alertname', 'cluster', 'service']
-        
+        group_by: ["alertname", "cluster", "service"]
+
         # When a new group of alerts is created by an incoming alert, wait at
         # least 'group_wait' to send the initial notification.
         # This way ensures that you get multiple alerts for the same group that start
-        # firing shortly after another are batched together on the first 
+        # firing shortly after another are batched together on the first
         # notification.
         group_wait: 30s
-        
+
         # When the first notification was sent, wait 'group_interval' to send a batch
         # of new alerts that started firing for that group.
         group_interval: 2m
-        
-        # repeat_interval: 3h 
-        
+
+        # repeat_interval: 3h
+
         # A default receiver
         receiver: blackhole
-        
-        # All the above attributes are inherited by all child routes and can 
+
+        # All the above attributes are inherited by all child routes and can
         # overwritten on each.
-        
+
         # The child route trees.
         routes:
-        - match:
-            cloudkite: "true"
-          receiver: cloudkite-slack
-        - match:
-            severity: critical
-          receiver: cloudkite-slack
+          - match:
+              cloudkite: "true"
+            receiver: cloudkite-slack
+          - match:
+              severity: critical
+            receiver: cloudkite-slack
         # This routes performs a regular expression match on alert labels to
         # catch alerts that are related to a list of services.
         # - match_re:
@@ -162,12 +158,12 @@ kube-prometheus-stack:
         # - match:
         #     service: files
         #   receiver: team-Y-mails
-        
+
         #   routes:
         #   - match:
         #       severity: critical
         #     receiver: team-Y-pager
-        
+
         # This route handles all alerts coming from a database service. If there's
         # no team to handle it, it defaults to the DB team.
         # - match:
@@ -183,17 +179,15 @@ kube-prometheus-stack:
         #   - match:
         #       owner: team-Y
         #     receiver: team-Y-pager
-        
-        
+
       # Inhibition rules allow to mute a set of alerts given that another alert is
       # firing.
-      # We use this to mute any warning-level notifications if the same alert is 
+      # We use this to mute any warning-level notifications if the same alert is
       # already critical.
       inhibit_rules:
-      - source_match:
-          severity: critical
-        target_match:
-          severity: warning
-        # Apply inhibition if the alertname is the same.
-        equal: ['alertname', 'cluster', 'service']
-
+        - source_match:
+            severity: critical
+          target_match:
+            severity: warning
+          # Apply inhibition if the alertname is the same.
+          equal: ["alertname", "cluster", "service"]
