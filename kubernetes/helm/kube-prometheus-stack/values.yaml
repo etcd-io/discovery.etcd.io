@@ -4,7 +4,7 @@ configMap:
 
 kube-prometheus-stack:
   grafana:
-    adminPassword: <MUST CHANGE>
+    adminPassword: cloudkitetesting
     defaultDashboardsEnabled: true
     envFromSecret: kube-prometheus-stack
     ingress:
