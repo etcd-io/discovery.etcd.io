@@ -1,0 +1,6 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+  - victortrac      # Victor Trac <victor@cloudkite.io>
+  - idvoretskyi     # Ihor Dvoretskyi <ihor@linux.com>
+  - eduartua        # Eduar Tua <eduartua@gmail.com>
