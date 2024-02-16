@@ -63,11 +63,12 @@ nodeSelector: {}
 tolerations: []
 
 metrics:
-  enabled: true
+  enabled: false
   serviceMonitor:
-    enabled: true
+    enabled: false
  
 prometheusRules:
+  enabled: false
   labels:
     severity: critical
     cloudkite: "true"
