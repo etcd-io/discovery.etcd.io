@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Chart.Name }}-custom
-data:
-{{ (.Files.Glob "configMaps/*").AsConfig | indent 2 }}

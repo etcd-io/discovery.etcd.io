@@ -13,9 +13,9 @@ livenessProbe:
   timeoutSeconds: 15
 
 metrics:
-  enabled: true
+  enabled: false
   podMonitor:
-    enabled: true
+    enabled: false
     namespace: prometheus
 
 persistence:
