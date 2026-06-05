@@ -4,10 +4,11 @@
 
 replicaCount: 5
 
-# Images are built using cloudbuild and published to GCP project etcd-io-dev
+# Built by cloudbuild, published to Artifact Registry in etcd-io-dev (gcr.io shut down in 2025); needs artifactregistry.reader on the prod node SA, see README.
+# cloudbuild.prod.yaml overrides image.tag with the app COMMIT_SHA at deploy time.
 image:
-  repository: gcr.io/etcd-io-dev/discoveryserver
-  tag: latest
+  repository: us-docker.pkg.dev/etcd-io-dev/discoveryserver/discoveryserver
+  tag: 48dabf80254960bf942cd81fe184f541b4c2f8fd
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []

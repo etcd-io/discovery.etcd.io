@@ -1,5 +1,11 @@
 replicaCount: 5
 
+# bitnami removed versioned tags in 2025; unsupported mirror lives at bitnamilegacy. TODO: move to official etcd image.
+image:
+  registry: docker.io
+  repository: bitnamilegacy/etcd
+  tag: 3.5.4-debian-11-r3
+
 auth:
   rbac:
     create: false
