@@ -33,14 +33,14 @@ Next step is to apply Terraform for the chosen environment. To ensure that it is
 and follow the [README](https://github.com/etcd-io/discovery.etcd.io/blob/master/terraform/README.md) instructions.
 
 #### Manual Step
-Once dev and prod infrastructure is built, it is required to update IAM policies of `artifacts.<dev-project>.appspot.com` GCS bucket adding both dev and prod gke_service_accounts
-as members with the role `roles/storage.objectViewer`. Only after it, clusters in both environments will be able to pull images from gcr.
+The discoveryserver image is published to Artifact Registry in the `etcd-io-dev` project
+(`us-docker.pkg.dev/etcd-io-dev/discoveryserver`), as gcr.io / Container Registry was shut down by Google in 2025.
+For clusters to pull it, the gke_service_accounts of both environments must have the role
+`roles/artifactregistry.reader` on that repository (prod pulls cross-project from `etcd-io-dev`).
 
-Gsutil command to update the IAM policy:
+gcloud command to grant the role:
 
-`gsutil iam ch serviceAccount:[SERVICE_ACCOUNT_EMAIL]:roles/storage.objectViewer gs://artifacts.<dev-project>.appspot.com`
-
-Note: if you get an error that the `artifacts.<dev-project>.appspot.com` does not exit, push an image and it will be created.
+`gcloud artifacts repositories add-iam-policy-binding discoveryserver --location=us --project=etcd-io-dev --member="serviceAccount:[SERVICE_ACCOUNT_EMAIL]" --role=roles/artifactregistry.reader`
 
 After applying terraform, a GKE cluster will be up and running in the VPC created. Now the cluster is ready to get deployments.
 
